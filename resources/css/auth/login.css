@@ -1,0 +1,150 @@
+.login-page {
+   background-image: url("../img/auth/auth-bg.jpg");
+   background-repeat: no-repeat;
+   background-size: cover;
+   min-height: 100vh;
+   display: flex;
+   align-items: center;
+}
+.login-page__container {
+   display: flex;
+   background-color: #fff;
+   border-radius: 8px;
+}
+/** login section start */
+.login {
+   display: flex;
+   flex-direction: column;
+   width: 65%;
+   padding: 10px;
+   min-height: 70vh;
+}
+.logos-wrapper {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+.login-form {
+   flex-grow: 1;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap: 15px;
+   margin-bottom: 60px;
+}
+.login-title {
+   color: var(--primary-color);
+   margin-bottom: 20px;
+}
+.login-fail-msg {
+   color: red;
+   width: 400px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 30px;
+   margin: 10px 0px;
+   background-color: #ffe2e2;
+}
+.login-label {
+   display: flex;
+   flex-direction: column;
+   color: var(--secondary-color);
+   position: relative;
+   gap: 5px;
+}
+.login-input {
+   border: none;
+   min-width: 350px;
+   font-size: 16px;
+   color: #1d1d1d;
+   display: flex;
+   height: 50px;
+   align-items: center;
+   padding: 8px 60px 8px 15px;
+   transition: 0.3s;
+   background-color: #fff;
+   box-shadow: 0px 6px 12px rgba(0, 0, 0, 15%);
+}
+.login-input::placeholder {
+   color: #757575;
+}
+.login-input:focus {
+   outline: none;
+   background-color: #eae9f3;
+   box-shadow: none;
+}
+.visibility-button {
+   border: none;
+   background-color: transparent;
+   position: absolute;
+   top: 0px;
+   right: 0px;
+   cursor: pointer;
+   display: flex;
+   height: 50px;
+   width: 50px;
+   justify-content: center;
+   align-items: center;
+   padding: 10px;
+}
+.visibility-button path {
+   fill: var(--secondary-color);
+}
+.invisible-icon {
+   display: none;
+}
+.visibility-button.visible .invisible-icon {
+   display: block;
+}
+.visibility-button.visible .visible-icon {
+   display: none;
+}
+.login-error-msg {
+   color: red;
+}
+.login-submit-btn {
+   display: flex;
+   width: 350px;
+   height: 50px;
+   border: none;
+   justify-content: center;
+   align-items: center;
+   font-size: 16px;
+   color: #fff;
+   background-color: #63a63e;
+   cursor: pointer;
+   margin-top: 10px;
+   transition: 0.3s;
+}
+.login-submit-btn:hover {
+   box-shadow: 0px 6px 12px rgba(0, 0, 0, 15%);
+}
+/** login section end */
+/** welcome section start */
+.welcome {
+   background-image: url("../img/auth/side-bg.jpg");
+   background-size: cover;
+   color: #fff;
+   width: 35%;
+   display: flex;
+   flex-direction: column;
+}
+.welcome__wrapper {
+   flex-grow: 1;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+.welcome__text {
+   text-align: center;
+   max-width: 250px;
+   margin: 0 auto;
+   margin-top: 15px;
+}
+.welcome__copyright {
+   margin: 10px 10px 10px auto;
+   text-align: end;
+}
+/** welcome section end */
