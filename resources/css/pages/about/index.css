@@ -1,0 +1,75 @@
+/** present time section start */
+.present-time {
+   background-color: #2659d1;
+   color: #fff;
+   padding: 60px 0px;
+}
+.present-time__title {
+   margin-top: 0px;
+   color: #fff;
+}
+.present-time__notation {
+   text-transform: uppercase;
+   font-size: 17.5px;
+   font-weight: 600;
+   margin-bottom: 5px;
+   display: block;
+}
+/** present time section end */
+/** our values section start */
+.our-values {
+   position: relative;
+   padding-bottom: 50px;
+}
+.our-values__bg {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   height: 100%;
+   width: 100%;
+   object-fit: cover;
+   opacity: 5%;
+}
+.our-values__container {
+   border-radius: 15px;
+   margin: 0px auto;
+   width: 1260px;
+   position: relative;
+}
+.values {
+   display: flex;
+   justify-content: space-between;
+   width: 1158px;
+   flex-wrap: wrap;
+}
+.values__item {
+   max-width: 180px;
+}
+.values__title {
+   font-size: 18px;
+   text-transform: uppercase;
+   font-weight: 500;
+   color: #0033ab;
+   margin-bottom: 5px;
+}
+.values__text {
+   width: 150px;
+   color: #8f8f8f;
+}
+/** our values section end */
+/** about us section start */
+.about-us {
+   margin-bottom: 30px;
+}
+.about-us__text {
+   color: #8f8f8f;
+   margin-bottom: 10px;
+}
+.about-us__list {
+   color: #8f8f8f;
+   margin-left: 50px;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+/** about us section end */
