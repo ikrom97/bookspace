@@ -42,6 +42,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
    Route::get('/ratings/reading-company', [PagesController::class, 'ratingsReadingCompany'])->name('ratings.readingCompany');
 
    Route::get('/rules', [PagesController::class, 'rules'])->name('rules');
+
+   Route::get('/users/read/{id}', [PagesController::class, 'usersRead'])->name('users.read');
    // main routes
    Route::get('/search', [MainController::class, 'search'])->name('search');
    Route::post('/feedback', [MainController::class, 'feedbackSend'])->name('feedback.send');

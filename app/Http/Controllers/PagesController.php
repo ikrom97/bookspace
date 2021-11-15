@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Book;
+use App\Models\Company;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -90,26 +92,60 @@ class PagesController extends Controller
 
    public function ratingsActiveReader()
    {
-      return view('pages.ratings.active-reader');
+      $users = User::select('id', 'company_id', 'name', 'surname', 'read_pages')
+         ->orderBy('read_pages', 'desc')->paginate(15)->fragment('ratings-title');
+
+      $rank = $users->firstItem();
+
+      return view('pages.ratings.active-reader', compact('users', 'rank'));
    }
 
    public function ratingsDisciplinedReader()
    {
-      return view('pages.ratings.disciplined-reader');
+      $users = User::select('id', 'company_id', 'name', 'surname', 'blacklist_value', 'renewed_deadlines')
+         ->orderBy('blacklist_value', 'asc')
+         ->orderBy('renewed_deadlines', 'asc')
+         ->paginate(15)->fragment('ratings-title');
+
+      $rank = $users->firstItem();
+
+      return view('pages.ratings.disciplined-reader', compact('users', 'rank'));
    }
 
    public function ratingsPopularBook()
    {
-      return view('pages.ratings.popular-book');
+      $books = Book::select('id', 'title', 'author', 'pages', 'rating', 'trashed')
+         ->where('trashed', false)->orderBy('rating', 'desc')
+         ->paginate(15)->fragment('ratings-title');
+
+      $rank = $books->firstItem();
+      return view('pages.ratings.popular-book', compact('books', 'rank'));
    }
 
    public function ratingsProactiveMember()
    {
-      return view('pages.ratings.proactive-member');
+      $users = User::select('id', 'company_id', 'name', 'surname')
+         ->withCount('presentations')->withCount('participations')
+         ->orderBy('presentations_count', 'desc')->orderBy('participations_count', 'desc')
+         ->paginate(15)->fragment('ratings-title');
+
+      $rank = $users->firstItem();
+
+      return view('pages.ratings.proactive-member', compact('users', 'rank'));
    }
 
    public function ratingsReadingCompany()
    {
-      return view('pages.ratings.reading-company');
+      $companies = Company::select('id', 'title', 'read_pages', 'read_books')
+         ->orderBy('read_pages', 'desc')->paginate(15)->fragment('ratings-title');
+
+         $rank = $companies->firstItem();
+
+      return view('pages.ratings.reading-company', compact('companies', 'rank'));
+   }
+
+   public function usersRead($id)
+   {
+      return view('pages.users.read');
    }
 }

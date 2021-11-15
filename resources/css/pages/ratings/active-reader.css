@@ -1,0 +1,44 @@
+.ratings-page {
+}
+.ratings-page__container {
+   display: flex;
+   gap: 30px;
+}
+.ratings {
+   display: flex;
+   flex-direction: column;
+   margin-bottom: 50px;
+   flex-grow: 1;
+}
+.ratings-list {
+   margin-bottom: 30px;
+   display: flex;
+   flex-direction: column;
+   gap: 1px;
+}
+.ratings-list-head {
+   display: flex;
+   height: 35px;
+   align-items: center;
+   padding: 0px 15px;
+   gap: 15px;
+   font-weight: 700;
+   text-transform: uppercase;
+   font-size: 12px;
+}
+.ratings-list-link {
+   display: flex;
+   height: 35px;
+   align-items: center;
+   padding: 0px 15px;
+   gap: 15px;
+   background-color: #f2f6f8;
+}
+.ratings-list-link:hover {
+   transform: scale(1.01);
+   background-color: #fff;
+}
+.ratings-list-link.inactive:hover {
+   transform: none;
+   background-color: #f2f6f8;
+}
