@@ -1,23 +1,17 @@
 <header class="header">
    <section class="header-top">
       <div class="container header-top__container">
-         <a class="ats-link" href="https://ats.tj/" target="_blank">
+         <a class="header-logo" href="{{route('home')}}">
             <img class="main-logo" src="{{asset('img/main-logo.png')}}" alt="AtS Book Space">
-         </a>
-         <a class="koinot-link" href="https://project2019.koinotinav.com/" target="_blank">
-            <img class="koinot-logo" src="{{asset('img/koinot-logo.png')}}" alt="Коиноти Нав">
+            {{$site->title}}
          </a>
          <div class="search">
             <form class="search-form" action="{{route('search')}}" data-family="search" method="get">
                @csrf
                <input class="search-input" data-family="search" type="search" name="keyword" placeholder="Поиск...">
                <button class="search-submit-btn" data-family="search" type="submit">
-                  <svg class="search-icon" data-family="search" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                     <path fill="#fff" data-family="search" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
-                  </svg>
-                  <svg class="search-close-icon" data-family="search" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
-                     <path fill="#00275f" data-family="search" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>
-                  </svg>
+                  <svg class="search-icon" data-family="search" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-family="search" d="M17 17L22 22M19.5 10.75C19.5 15.5825 15.5825 19.5 10.75 19.5C5.91751 19.5 2 15.5825 2 10.75C2 5.91751 5.91751 2 10.75 2C15.5825 2 19.5 5.91751 19.5 10.75Z" stroke="#fff " stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg class="search-close-icon" data-family="search" width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g data-family="search" data-name="Layer 2"><g data-family="search" data-name="close"><rect data-family="search" width="24" height="24" transform="rotate(180 12 12)" opacity="0"/><path data-family="search" d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z"/></g></g></svg>
                </button>
             </form>
             <ul class="search-result"></ul>

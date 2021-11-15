@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
          PresentationsSeeder::class,
          ActivitiesSeeder::class,
          BookedBooksSeeder::class,
+         BannersSeeder::class,
       ]);
    }
 }

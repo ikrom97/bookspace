@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Models\Site;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
@@ -39,9 +40,12 @@ class AppServiceProvider extends ServiceProvider
 
             $site = Site::first();
 
+            $categories = Category::get();
+
             return $view->with('loggedUser', $loggedUser)
                ->with('notes', $notes)
                ->with('site', $site)
+               ->with('categories', $categories)
                ->with('route', \Route::currentRouteName());
          }
       });

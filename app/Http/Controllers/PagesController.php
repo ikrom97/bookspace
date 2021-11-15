@@ -2,13 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
    public function index()
    {
-      return view('pages.index');
+      $banners = Banner::get();
+
+      $popularBooks = Book::select('id', 'category_id', 'user_id', 'img_front', 'title', 'author', 'rating', 'trashed')
+         ->where('trashed', false)->orderBy('rating', 'desc')->paginate(32);
+
+      $newBooks = Book::select('id', 'category_id', 'user_id', 'img_front', 'title', 'author', 'rating', 'trashed', 'created_at')
+         ->where('trashed', false)->orderBy('created_at', 'desc')->paginate(32);
+
+      $booksCount = Book::count();
+
+      return view('pages.index', compact('banners', 'popularBooks', 'newBooks', 'booksCount'));
    }
 
    public function about()

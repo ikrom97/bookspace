@@ -162,9 +162,9 @@ if (loginPage) {
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
-/*!**********************************************!*\
-  !*** ./resources/js/components/book-card.js ***!
-  \**********************************************/
+/*!***********************************************!*\
+  !*** ./resources/js/components/books-card.js ***!
+  \***********************************************/
 
 })();
 
@@ -173,7 +173,30 @@ if (loginPage) {
 /*!*************************************!*\
   !*** ./resources/js/pages/index.js ***!
   \*************************************/
+var homePage = document.querySelector('.home-page');
 
+if (homePage) {
+  //* banner start
+  $('.vitrin-carousel').owlCarousel({
+    items: 1,
+    loop: true,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true,
+    nav: true
+  }); //* banner end
+  //* popular books start
+
+  $('.popular-books-carousel').owlCarousel({
+    items: 4,
+    margin: 9,
+    loop: true,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true,
+    nav: true
+  }); //* popular books end
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
