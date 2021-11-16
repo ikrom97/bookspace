@@ -5,6 +5,7 @@ use App\Http\Controllers\BooksController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\PresentationsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -49,4 +50,6 @@ Route::group(['middleware' => ['AuthCheck']], function () {
    Route::post('/feedback', [MainController::class, 'feedbackSend'])->name('feedback.send');
    // book route
    Route::get('/books/extend-deadline/{id}', [BooksController::class, 'extendDeadline'])->name('extendDeadline');
+   // presentation routes
+   Route::get('/presentations/participate', [PresentationsController::class, 'participate'])->name('presentations.participate');
 });

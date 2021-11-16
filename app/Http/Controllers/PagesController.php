@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Book;
 use App\Models\Company;
+use App\Models\Presentation;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -87,7 +89,12 @@ class PagesController extends Controller
 
    public function presentations()
    {
-      return view('pages.presentations');
+      $currentDate = Carbon::now();
+
+      $presentations = Presentation::whereDate('date', '>', $currentDate)
+         ->where('accepted', true)->orderBy('date', 'asc')->paginate(3);
+
+      return view('pages.presentations.index', compact('presentations'));
    }
 
    public function ratingsActiveReader()
@@ -139,7 +146,7 @@ class PagesController extends Controller
       $companies = Company::select('id', 'title', 'read_pages', 'read_books')
          ->orderBy('read_pages', 'desc')->paginate(15)->fragment('ratings-title');
 
-         $rank = $companies->firstItem();
+      $rank = $companies->firstItem();
 
       return view('pages.ratings.reading-company', compact('companies', 'rank'));
    }
