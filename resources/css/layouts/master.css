@@ -321,3 +321,26 @@ input[type="search"]::-webkit-search-results-decoration {
    order: 1;
 }
 /*! books 3D view end */
+/*! breadcrumbs start */
+.breadcrumbs {
+   width: 100%;
+   display: flex;
+   gap: 10px;
+   align-items: center;
+   font-size: 13px;
+   color: #8f8f8f;
+   line-height: 1;
+}
+.breadcrumbs-item {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+.breadcrumbs-link:hover {
+   color: #ee3643;
+}
+.breadcrumbs-link.current {
+   color: var(--primary-color);
+   cursor: context-menu;
+}
+/*! breadcrumbs end */

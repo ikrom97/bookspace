@@ -308,7 +308,23 @@ if (homePage) {
 /*!*******************************************!*\
   !*** ./resources/js/pages/books/index.js ***!
   \*******************************************/
+var booksPage = document.querySelector('.books-page');
 
+if (booksPage) {
+  var catalogWrap = booksPage.querySelector('.catalog-dropdown'),
+      catalogBtn = catalogWrap.querySelector('.catalog-dropdown__button'),
+      body = document.querySelector('body');
+
+  catalogBtn.onclick = function () {
+    catalogWrap.classList.toggle('open');
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'catalog') {
+      catalogWrap.classList.remove('open');
+    }
+  });
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.

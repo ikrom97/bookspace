@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Models\Banner;
 use App\Models\Book;
+use App\Models\Category;
 use App\Models\Company;
 use App\Models\Presentation;
 use App\Models\User;
@@ -80,17 +81,99 @@ class PagesController extends Controller
       $activities = Activity::whereDate('start', '>', $currentDate)
          ->orderBy('start', 'asc')->paginate(4);
 
-         return view('pages.activities.index', compact('activities'));
+      return view('pages.activities.index', compact('activities'));
    }
 
-   public function books()
+   public function books(Request $request)
    {
-      return view('pages.books.index');
+      $list = 'standard';
+      $sort = 'title';
+      $page = 1;
+
+      if ($request->list) {
+         $list = $request->list;
+      }
+      if ($request->sort) {
+         $sort = $request->sort;
+      }
+      if ($request->page) {
+         $page = $request->page;
+      }
+
+      $books = Book::select('id', 'category_id', 'user_id', 'img_front', 'title', 'author', 'pages', 'rating', 'trashed')->where('trashed', false);
+
+      switch ($sort) {
+         case 'title':
+            $books = $books->orderBy('title', 'asc')->paginate(16)->appends(['list' => $list, 'sort' => $sort, 'page' => $page])->fragment('books-page');
+            break;
+
+         case 'newest':
+            $books = $books->latest()->paginate(16)->appends(['list' => $list, 'sort' => $sort, 'page' => $page])->fragment('books-page');
+            break;
+
+         case 'rating':
+            $books = $books->orderBy('rating', 'desc')->paginate(16)->appends(['list' => $list, 'sort' => $sort, 'page' => $page])->fragment('books-page');
+            break;
+
+         case 'available':
+            $books = $books->orderBy('user_id', 'asc')->paginate(16)->appends(['list' => $list, 'sort' => $sort, 'page' => $page])->fragment('books-page');
+            break;
+      }
+
+      $rank = $books->firstItem();
+
+      $booksCategories = Category::get();
+
+      return view('pages.books.index', compact('booksCategories', 'books', 'rank', 'list', 'sort', 'page'));
    }
 
    public function booksRead()
    {
       return view('pages.books.read');
+   }
+
+   public function booksCategories(Request $request)
+   {
+      $list = 'standard';
+      $sort = 'title';
+      $page = 1;
+      $category = Category::find($request->category);
+
+      if ($request->list) {
+         $list = $request->list;
+      }
+      if ($request->sort) {
+         $sort = $request->sort;
+      }
+      if ($request->page) {
+         $page = $request->page;
+      }
+
+      $books = Book::select('id', 'category_id', 'user_id', 'img_front', 'title', 'author', 'pages', 'rating', 'trashed')->where('trashed', false);
+
+      switch ($sort) {
+         case 'title':
+            $books = $books->where('category_id', $category->id)->orderBy('title', 'asc')->paginate(16)->appends(['list' => $list, 'sort' => $sort, 'page' => $page, 'category' => $category->id])->fragment('books-page');
+            break;
+
+         case 'newest':
+            $books = $books->where('category_id', $category->id)->latest()->paginate(16)->appends(['list' => $list, 'sort' => $sort, 'page' => $page, 'category' => $category->id])->fragment('books-page');
+            break;
+
+         case 'rating':
+            $books = $books->where('category_id', $category->id)->orderBy('rating', 'desc')->paginate(16)->appends(['list' => $list, 'sort' => $sort, 'page' => $page, 'category' => $category->id])->fragment('books-page');
+            break;
+
+         case 'available':
+            $books = $books->where('category_id', $category->id)->orderBy('user_id', 'asc')->paginate(16)->appends(['list' => $list, 'sort' => $sort, 'page' => $page, 'category' => $category->id])->fragment('books-page');
+            break;
+      }
+
+      $rank = $books->firstItem();
+
+      $booksCategories = Category::get();
+
+      return view('pages.books.index', compact('booksCategories', 'books', 'rank', 'list', 'sort', 'page', 'category'));
    }
 
    public function presentations()

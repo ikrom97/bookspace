@@ -33,7 +33,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
    Route::get('/books', [PagesController::class, 'books'])->name('books');
    Route::get('/books/read/{id}', [PagesController::class, 'booksRead'])->name('books.read');
-   Route::get('/books/categories/{id}', [PagesController::class, 'booksCategories'])->name('books.categories');
+   Route::get('/books/categories', [PagesController::class, 'booksCategories'])->name('books.categories');
 
    Route::get('/presentations', [PagesController::class, 'presentations'])->name('presentations');
 
