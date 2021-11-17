@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivitiesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\Controller;
@@ -52,4 +53,6 @@ Route::group(['middleware' => ['AuthCheck']], function () {
    Route::get('/books/extend-deadline/{id}', [BooksController::class, 'extendDeadline'])->name('extendDeadline');
    // presentation routes
    Route::get('/presentations/participate', [PresentationsController::class, 'participate'])->name('presentations.participate');
+   // activity routes
+   Route::get('/activity/participate', [ActivitiesController::class, 'participate'])->name('activities.participate');
 });

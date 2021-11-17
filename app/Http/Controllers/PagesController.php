@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Banner;
 use App\Models\Book;
 use App\Models\Company;
@@ -74,12 +75,17 @@ class PagesController extends Controller
 
    public function activities()
    {
-      return view('pages.activities');
+      $currentDate = Carbon::now();
+
+      $activities = Activity::whereDate('start', '>', $currentDate)
+         ->orderBy('start', 'asc')->paginate(4);
+
+         return view('pages.activities.index', compact('activities'));
    }
 
    public function books()
    {
-      return view('pages.books');
+      return view('pages.books.index');
    }
 
    public function booksRead()
@@ -149,6 +155,11 @@ class PagesController extends Controller
       $rank = $companies->firstItem();
 
       return view('pages.ratings.reading-company', compact('companies', 'rank'));
+   }
+
+   public function rules()
+   {
+      return view('pages.rules.index');
    }
 
    public function usersRead($id)

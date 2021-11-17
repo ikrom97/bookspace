@@ -9,9 +9,7 @@
       </div>
       @if ($presentations->count() == 0)
          <div class="container">
-            <p class="no-content">
-               К сожалению, на ближайшее время презентаций не запланировано.
-            </p>
+            К сожалению, на ближайшее время презентаций не запланировано.
          </div>
       @else
          @foreach ($presentations as $key => $presentation)

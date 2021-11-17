@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,15 @@ class AuthCheck
    public function handle(Request $request, Closure $next)
    {
       if (!session()->has('loggedUser') && $request->path() != 'auth/login') {
+
          return redirect(route('auth.login'))->with('fail', 'Вы должны быть зарегистрированы');
+      }
+
+      $loggedUser = User::select('id', 'blacklist')->find(session()->get('loggedUser'));
+
+      if ($loggedUser && $loggedUser->blacklist) {
+         session()->pull('loggedUser');
+         return redirect(route('auth.login'))->with('fail', 'Вы заблокированы! Обратитесь в администрацию');
       }
 
       if (session()->has('loggedUser') && $request->path() == 'auth/login') {
