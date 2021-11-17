@@ -127,9 +127,14 @@ class PagesController extends Controller
       return view('pages.books.index', compact('booksCategories', 'books', 'rank', 'list', 'sort', 'page'));
    }
 
-   public function booksRead()
+   public function booksRead($id)
    {
-      return view('pages.books.read');
+      $book = Book::find($id);
+
+      $similarBooks = Book::select('id', 'category_id', 'user_id', 'img_front', 'title', 'author', 'rating', 'trashed')
+         ->where('trashed', false)->where('category_id', $book->category->id)->orderBy('rating', 'desc')->get();
+
+      return view('pages.books.read', compact('book', 'similarBooks'));
    }
 
    public function booksCategories(Request $request)

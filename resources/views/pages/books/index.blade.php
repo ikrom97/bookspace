@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Книги')
+@section('title', isset($category) ? $category->title : 'Книги')
 
 @section('content')
    <main class="books-page" id="books-page">

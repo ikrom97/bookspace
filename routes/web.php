@@ -50,7 +50,9 @@ Route::group(['middleware' => ['AuthCheck']], function () {
    Route::get('/search', [MainController::class, 'search'])->name('search');
    Route::post('/feedback', [MainController::class, 'feedbackSend'])->name('feedback.send');
    // book route
-   Route::get('/books/extend-deadline/{id}', [BooksController::class, 'extendDeadline'])->name('extendDeadline');
+   Route::get('/books/extend-deadline/{id}', [BooksController::class, 'extendDeadline'])->name('books.extendDeadline');
+   Route::get('/books/booking/{id}', [BooksController::class, 'booking'])->name('books.booking');
+   Route::get('/books/rating', [BooksController::class, 'rating'])->name('books.rating');
    // presentation routes
    Route::get('/presentations/participate', [PresentationsController::class, 'participate'])->name('presentations.participate');
    // activity routes

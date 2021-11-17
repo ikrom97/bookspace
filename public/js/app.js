@@ -332,7 +332,34 @@ if (booksPage) {
 /*!******************************************!*\
   !*** ./resources/js/pages/books/read.js ***!
   \******************************************/
+var bookReadPage = document.querySelector('.book-read-page');
 
+if (bookReadPage) {
+  var ratingWrap = bookReadPage.querySelector('.rating-wrap'),
+      ratingBtn = ratingWrap.querySelector('.book-link--rate'),
+      body = document.querySelector('body'); //* rating start
+
+  ratingBtn.onclick = function () {
+    ratingWrap.classList.toggle('open');
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'rating') {
+      ratingWrap.classList.remove('open');
+    }
+  }); //* rating end
+  //* popular books start
+
+  $('.popular-books-carousel').owlCarousel({
+    items: 4,
+    margin: 9,
+    loop: true,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true,
+    nav: true
+  }); //* popular books end
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.

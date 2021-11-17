@@ -38,7 +38,7 @@
                   <input data-id="year" type="hidden" value="{{\Carbon\Carbon::parse($loggedUser->book->return_date)->format('Y')}}">
                   <input data-id="month" type="hidden" value="{{\Carbon\Carbon::parse($loggedUser->book->return_date)->format('m')}}">
                   <input data-id="day" type="hidden" value="{{\Carbon\Carbon::parse($loggedUser->book->return_date)->format('d')}}">
-                  <a class="taken-book-deadline" href="{{route('extendDeadline', $loggedUser->book->id)}}">
+                  <a class="taken-book-deadline" href="{{route('books.extendDeadline', $loggedUser->book->id)}}">
                      <span data-id="days"></span><small class="days-icon">д</small>
                      <span data-id="hours"></span><b>:</b>
                      <span data-id="minutes"></span><b>:</b>
