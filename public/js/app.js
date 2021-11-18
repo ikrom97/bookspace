@@ -260,7 +260,22 @@ if (homePage) {
 /*!****************************************************!*\
   !*** ./resources/js/pages/account/presentation.js ***!
   \****************************************************/
+var accountPresentationPage = document.querySelector('.account-presentation-page');
 
+if (accountPresentationPage) {
+  $('#picker').dateTimePicker({
+    dateFormat: "YYYY-MM-DD HH:mm",
+    locale: 'ru',
+    showTime: true,
+    selectData: "now",
+    positionShift: {
+      top: 20,
+      left: 0
+    },
+    title: "Select Date and Time",
+    buttonTitle: "Select"
+  });
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
@@ -268,7 +283,25 @@ if (homePage) {
 /*!***********************************************!*\
   !*** ./resources/js/pages/account/profile.js ***!
   \***********************************************/
+var accountProfilePage = document.querySelector('.account-profile-page');
 
+if (accountProfilePage) {
+  var passwordForm = accountProfilePage.querySelector('.password-form'),
+      visionBtns = passwordForm.querySelectorAll('.form-password-btn');
+  visionBtns.forEach(function (button) {
+    button.onclick = function () {
+      var input = passwordForm.querySelector("[data-input=\"".concat(button.dataset.button, "\"]"));
+
+      if (button.classList.contains('visible')) {
+        button.classList.remove('visible');
+        input.setAttribute('type', 'password');
+      } else {
+        button.classList.add('visible');
+        input.setAttribute('type', 'text');
+      }
+    };
+  });
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
@@ -300,6 +333,14 @@ if (homePage) {
 /*!************************************************!*\
   !*** ./resources/js/pages/activities/index.js ***!
   \************************************************/
+
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!***********************************************!*\
+  !*** ./resources/js/pages/activities/read.js ***!
+  \***********************************************/
 
 })();
 
@@ -423,6 +464,22 @@ if (bookReadPage) {
 /*!*******************************************!*\
   !*** ./resources/js/pages/rules/index.js ***!
   \*******************************************/
+
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!*******************************************!*\
+  !*** ./resources/js/pages/users/index.js ***!
+  \*******************************************/
+
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!******************************************!*\
+  !*** ./resources/js/pages/users/read.js ***!
+  \******************************************/
 
 })();
 

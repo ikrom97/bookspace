@@ -20,7 +20,6 @@ class UsersSeeder extends Seeder
       $faker = Faker::create('ru_RU');
 
       foreach (range(1, 91) as $v) {
-         $img = $faker->numberBetween($min = 1, $max = 16);
          $password = 'user';
 
          $takenBooks = TakenBook::where('user_id', $v)->get();
@@ -38,7 +37,7 @@ class UsersSeeder extends Seeder
          }
 
          User::insert([
-            'avatar' => 'avatar' . $img . '.jpg',
+            'avatar' => 'default.jpg',
             'name' => $faker->firstName,
             'surname' => $faker->lastName,
             'last_name' => $faker->firstName . 'вич',
@@ -59,7 +58,7 @@ class UsersSeeder extends Seeder
       }
 
       User::insert([
-         'avatar' => 'avatar1.jpg',
+         'avatar' => 'default.jpg',
          'name' => 'Admin',
          'surname' => 'Adminov',
          'last_name' => 'Adminovich',

@@ -12,7 +12,7 @@ class ActivitiesController extends Controller
    {
       $user = User::find(session('loggedUser'));
 
-      $activity = Activity::find($request->id);
+      $activity = Activity::where('trashed', false)->find($request->id);
 
       foreach ($activity->participants as $participant) {
          if ($participant->id == $user->id) {

@@ -1,0 +1,58 @@
+.profile__user-read {
+   display: flex;
+   background-color: #fff;
+}
+.avatar-wrap {
+   display: flex;
+   min-width: 260px;
+   height: 300px;
+   margin: 30px;
+   margin-right: 0px;
+   border-radius: 15px;
+   object-fit: cover;
+   position: relative;
+   overflow: hidden;
+}
+.profile-avatar {
+   display: block;
+   height: 100%;
+   width: 100%;
+   object-fit: cover;
+}
+.profile-avatar__form {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   height: 100%;
+   width: 100%;
+   background-color: rgba(0, 0, 0, 20%);
+   opacity: 0;
+   z-index: -1;
+   transition: 0.3s;
+}
+.avatar-wrap:hover .profile-avatar__form {
+   opacity: 1;
+   z-index: 0;
+}
+.profile-avatar__label {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+   width: 100%;
+   cursor: pointer;
+}
+.profile-avatar__label svg {
+   fill: #fff;
+   display: block;
+   margin: 100px;
+}
+.profile-avatar__input {
+   visibility: hidden;
+   position: absolute;
+}
+.user-info-title {
+   font-weight: bold;
+   text-transform: uppercase;
+   font-size: 18px;
+}

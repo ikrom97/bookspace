@@ -33,6 +33,7 @@ mix
       'resources/css/pages/account/readers.css',
       'resources/css/pages/account/sidebar.css',
       'resources/css/pages/activities/index.css',
+      'resources/css/pages/activities/read.css',
       'resources/css/pages/books/index.css',
       'resources/css/pages/books/read.css',
       'resources/css/pages/presentations/index.css',
@@ -43,6 +44,8 @@ mix
       'resources/css/pages/ratings/reading-company.css',
       'resources/css/pages/ratings/sidebar.css',
       'resources/css/pages/rules/index.css',
+      'resources/css/pages/users/index.css',
+      'resources/css/pages/users/read.css',
    ], 'public/css/app.css')
 
    .styles([
@@ -90,6 +93,7 @@ mix
       'resources/js/pages/account/readers.js',
       'resources/js/pages/account/sidebar.js',
       'resources/js/pages/activities/index.js',
+      'resources/js/pages/activities/read.js',
       'resources/js/pages/books/index.js',
       'resources/js/pages/books/read.js',
       'resources/js/pages/presentations/index.js',
@@ -100,6 +104,8 @@ mix
       'resources/js/pages/ratings/reading-company.js',
       'resources/js/pages/ratings/sidebar.js',
       'resources/js/pages/rules/index.js',
+      'resources/js/pages/users/index.js',
+      'resources/js/pages/users/read.js',
    ], 'public/js/app.js')
 
    .js([

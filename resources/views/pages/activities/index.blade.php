@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Мероприятия клуба')
+@section('title', 'Мероприятие клуба')
 
 @section('content')
    <main class="activities-page">

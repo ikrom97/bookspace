@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Models\Banner;
 use App\Models\Book;
+use App\Models\BookedBook;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Presentation;
+use App\Models\TakenBook;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -41,12 +43,19 @@ class PagesController extends Controller
 
    public function accountActivities()
    {
-      return view('pages.account.activities');
+      $activities = User::find(session()->get('loggedUser'))->actions()->where('trashed', false)
+         ->orderBy('end', 'desc')->paginate(16)->fragment('account-title');
+
+      $rank = $activities->firstItem();
+
+      return view('pages.account.activities', compact('activities', 'rank'));
    }
 
    public function accountBookedBooks()
    {
-      return view('pages.account.booked-books');
+      $books = BookedBook::where('user_id', session('loggedUser'))->get();
+
+      return view('pages.account.booked-books', compact('books'));
    }
 
    public function accountLikedBooks()
@@ -56,32 +65,60 @@ class PagesController extends Controller
 
    public function accountPresentation()
    {
-      return view('pages.account.presentation');
+      $books = Book::select('id', 'title', 'code', 'trashed')->where('trashed', false)->orderBy('title')->get();
+
+      return view('pages.account.presentation', compact('books'));
    }
 
    public function accountProfile()
    {
-      return view('pages.account.profile');
+      $user = User::where('trashed', false)->find(session()->get('loggedUser'));
+
+      return view('pages.account.profile', compact('user'));
    }
 
    public function accountReadBooks()
    {
-      return view('pages.account.read-books');
+      $books = TakenBook::select('taken_books.id', 'taken_books.user_id', 'taken_books.book_id')
+         ->where('taken_books.user_id', session()->get('loggedUser'))
+         ->join('books', 'taken_books.book_id', '=', 'books.id')
+         ->orderBy('books.title')
+         ->paginate(16)->fragment('account-title');
+
+      $rank = $books->firstItem();
+
+      return view('pages.account.read-books', compact('books', 'rank'));
    }
 
    public function accountReaders()
    {
-      return view('pages.account.readers');
+      $users = User::select('id', 'company_id', 'name', 'surname', 'read_pages', 'trashed')
+         ->where('trashed', false)->orderBy('name', 'asc')->paginate(16)->fragment('account-title');
+
+      $rank = $users->firstItem();
+
+      return view('pages.account.readers', compact('users', 'rank'));
    }
 
    public function activities()
    {
       $currentDate = Carbon::now();
 
-      $activities = Activity::whereDate('start', '>', $currentDate)
+      $activities = Activity::where('trashed', false)->whereDate('start', '>', $currentDate)
          ->orderBy('start', 'asc')->paginate(4);
 
       return view('pages.activities.index', compact('activities'));
+   }
+
+   public function activitiesRead($id)
+   {
+      $activity = Activity::where('trashed', 'false')->find($id);
+
+      if ($activity) {
+         return view('pages.activities.read', compact('activity'));
+      } else {
+         return back()->with('fail', 'Мероприятие не найдено');
+      }
    }
 
    public function books(Request $request)
@@ -132,7 +169,7 @@ class PagesController extends Controller
       $book = Book::find($id);
 
       $similarBooks = Book::select('id', 'category_id', 'user_id', 'img_front', 'title', 'author', 'rating', 'trashed')
-         ->where('trashed', false)->where('category_id', $book->category->id)->orderBy('rating', 'desc')->get();
+         ->where('trashed', false)->where('category_id', $book->category_id)->orderBy('rating', 'desc')->get();
 
       return view('pages.books.read', compact('book', 'similarBooks'));
    }
@@ -142,7 +179,7 @@ class PagesController extends Controller
       $list = 'standard';
       $sort = 'title';
       $page = 1;
-      $category = Category::find($request->category);
+      $category = Category::where('trashed', false)->find($request->category);
 
       if ($request->list) {
          $list = $request->list;
@@ -176,7 +213,7 @@ class PagesController extends Controller
 
       $rank = $books->firstItem();
 
-      $booksCategories = Category::get();
+      $booksCategories = Category::where('trashed', false)->get();
 
       return view('pages.books.index', compact('booksCategories', 'books', 'rank', 'list', 'sort', 'page', 'category'));
    }
@@ -185,7 +222,7 @@ class PagesController extends Controller
    {
       $currentDate = Carbon::now();
 
-      $presentations = Presentation::whereDate('date', '>', $currentDate)
+      $presentations = Presentation::where('trashed', false)->whereDate('date', '>', $currentDate)
          ->where('accepted', true)->orderBy('date', 'asc')->paginate(3);
 
       return view('pages.presentations.index', compact('presentations'));
@@ -193,8 +230,8 @@ class PagesController extends Controller
 
    public function ratingsActiveReader()
    {
-      $users = User::select('id', 'company_id', 'name', 'surname', 'read_pages')
-         ->orderBy('read_pages', 'desc')->paginate(15)->fragment('ratings-title');
+      $users = User::select('id', 'company_id', 'name', 'surname', 'read_pages', 'trashed')
+         ->where('trashed', false)->orderBy('read_pages', 'desc')->paginate(16)->fragment('ratings-title');
 
       $rank = $users->firstItem();
 
@@ -203,10 +240,11 @@ class PagesController extends Controller
 
    public function ratingsDisciplinedReader()
    {
-      $users = User::select('id', 'company_id', 'name', 'surname', 'blacklist_value', 'renewed_deadlines')
+      $users = User::select('id', 'company_id', 'name', 'surname', 'blacklist_value', 'renewed_deadlines', 'trashed')
+         ->where('trashed', false)
          ->orderBy('blacklist_value', 'asc')
          ->orderBy('renewed_deadlines', 'asc')
-         ->paginate(15)->fragment('ratings-title');
+         ->paginate(16)->fragment('ratings-title');
 
       $rank = $users->firstItem();
 
@@ -217,7 +255,7 @@ class PagesController extends Controller
    {
       $books = Book::select('id', 'title', 'author', 'pages', 'rating', 'trashed')
          ->where('trashed', false)->orderBy('rating', 'desc')
-         ->paginate(15)->fragment('ratings-title');
+         ->paginate(16)->fragment('ratings-title');
 
       $rank = $books->firstItem();
       return view('pages.ratings.popular-book', compact('books', 'rank'));
@@ -225,10 +263,11 @@ class PagesController extends Controller
 
    public function ratingsProactiveMember()
    {
-      $users = User::select('id', 'company_id', 'name', 'surname')
+      $users = User::select('id', 'company_id', 'name', 'surname', 'trashed')
+         ->where('trashed', false)
          ->withCount('presentations')->withCount('participations')
          ->orderBy('presentations_count', 'desc')->orderBy('participations_count', 'desc')
-         ->paginate(15)->fragment('ratings-title');
+         ->paginate(16)->fragment('ratings-title');
 
       $rank = $users->firstItem();
 
@@ -237,8 +276,9 @@ class PagesController extends Controller
 
    public function ratingsReadingCompany()
    {
-      $companies = Company::select('id', 'title', 'read_pages', 'read_books')
-         ->orderBy('read_pages', 'desc')->paginate(15)->fragment('ratings-title');
+      $companies = Company::select('id', 'title', 'read_pages', 'read_books', 'trashed')
+         ->where('trashed', false)
+         ->orderBy('read_pages', 'desc')->paginate(16)->fragment('ratings-title');
 
       $rank = $companies->firstItem();
 
@@ -250,8 +290,31 @@ class PagesController extends Controller
       return view('pages.rules.index');
    }
 
+   public function users()
+   {
+      $users = User::select('id', 'company_id', 'name', 'surname', 'trashed')
+         ->where('trashed', false)->orderBy('surname', 'asc')
+         ->paginate(16)->fragment('users-title');
+
+      $rank = $users->firstItem();
+
+      return view('pages.users.index', compact('users', 'rank'));
+   }
+
    public function usersRead($id)
    {
-      return view('pages.users.read');
+      $user = User::where('trashed', false)->find($id);
+
+      if ($user) {
+         $users = User::select('id', 'company_id', 'name', 'surname', 'trashed')
+            ->where('trashed', false)->orderBy('surname', 'asc')
+            ->paginate(16)->fragment('users-title');
+
+         $rank = $users->firstItem();
+
+         return view('pages.users.read', compact('user', 'users', 'rank'));
+      } else {
+         return back()->with('fail', 'Такого читателя не существует');
+      }
    }
 }

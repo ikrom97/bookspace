@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
          $table->id();
          $table->string('title');
          $table->text('icon');
+         $table->boolean('trashed')->default(false);
          $table->timestamps();
       });
    }

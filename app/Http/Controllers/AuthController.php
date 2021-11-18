@@ -21,7 +21,7 @@ class AuthController extends Controller
          'password' => 'required|min:4'
       ]);
       // Find user by login
-      $user = User::where('login', '=', $request->login)->first();
+      $user = User::where('trashed', false)->where('login', '=', $request->login)->first();
       // Show fail when user is not founded
       if (!$user) {
          return back()->with('fail', 'Мы не узнаем ваш адрес для входа');

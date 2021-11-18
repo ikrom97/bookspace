@@ -22,6 +22,16 @@
       <div class="modal modal--fail {{session()->has('fail') ? '' : 'hidden'}}">{{session()->get('fail')}}</div>
       <div class="modal modal--success {{session()->has('success') ? '' : 'hidden'}}">{{session()->get('success')}}</div>
 
+      @if ($errors->any())
+         <div class="modal modal--fail">
+            <ul class="form-errors">
+               @foreach ($errors->all() as $error)
+                  <li class="form-errors__item">{{ $error }}</li>
+               @endforeach
+            </ul>
+         </div>
+      @endif
+
       @include('layouts.header')
 
       @yield('content')
