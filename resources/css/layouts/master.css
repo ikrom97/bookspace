@@ -722,6 +722,7 @@ input[type="search"]::-webkit-search-results-decoration {
    gap: 10px;
    line-height: 1.4;
    margin: 30px 60px;
+   flex-grow: 1;
 }
 .user-description {
    margin-bottom: 10px;
