@@ -4,6 +4,7 @@ use App\Http\Controllers\ActivitiesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PresentationsController;
@@ -64,11 +65,21 @@ Route::group(['middleware' => ['AuthCheck']], function () {
    // activity routes
    Route::get('/activity/participate', [ActivitiesController::class, 'participate'])->name('activities.participate');
 
-   // Admin routes
    Route::group(['middleware' => ['AdminCheck']], function () {
+      // dashboard pages
+      Route::get('/dashboard/books', [DashboardController::class, 'books'])->name('dashboard.books');
+      Route::get('/dashboard/books-create', [DashboardController::class, 'booksCreate'])->name('dashboard.books.create');
+      Route::get('/dashboard/books-read/{book}', [DashboardController::class, 'booksRead'])->name('dashboard.books.read');
+
+      Route::get('/dashboard/users', [DashboardController::class, 'users'])->name('dashboard.users');
+      Route::get('/dashboard/users-create', [DashboardController::class, 'usersCreate'])->name('dashboard.users.create');
+      Route::get('/dashboard/users-read/{user}', [DashboardController::class, 'usersRead'])->name('dashboard.users.read');
+      
+      // presentations route
       Route::get('/presentations/accept/{presentation}', [PresentationsController::class, 'accept'])->name('presentations.accept');
       Route::get('/presentations/deny/{presentation}', [PresentationsController::class, 'deny'])->name('presentations.deny');
       Route::get('/presentations/download/{presentation}', [PresentationsController::class, 'download'])->name('presentations.download');
+      // main routes
       Route::post('/feedback/answer', [MainController::class, 'feedbackAnswer'])->name('feedback.answer');
    });
 });

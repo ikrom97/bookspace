@@ -331,6 +331,9 @@
    height: 18px;
    color: var(--primary-color);
 }
+.account-link-wrap {
+   position: relative;
+}
 .account-link {
    display: flex;
    gap: 10px;
@@ -348,6 +351,17 @@
    display: block;
    height: 18px;
    color: var(--primary-color);
+}
+.dashboard-link {
+   position: absolute;
+   bottom: 0px;
+   right: 0px;
+   min-width: max-content;
+   transform: translateY(calc(100% + 5px));
+   color: #1d1d1d;
+}
+.dashboard-link:hover {
+   text-decoration: underline;
 }
 /* navigation start */
 .main-navigation {

@@ -1,0 +1,96 @@
+.dashboard-sidebar {
+   position: relative;
+   color: #fff;
+   font-size: 15px;
+   max-width: 300px;
+   transition: 0.3s;
+}
+.dashboard-sidebar.hidden {
+   max-width: 5px;
+}
+.main-navigation {
+   background-color: var(--primary-color);
+   transform: translateX(0%);
+   overflow: hidden;
+   height: 100%;
+   position: relative;
+   transition: 0.3s;
+}
+.main-navigation::after {
+   content: "";
+   display: block;
+   height: 100%;
+   width: 5px;
+   background-color: var(--secondary-color);
+   position: absolute;
+   top: 0px;
+   right: 0px;
+}
+.dashboard-sidebar.hidden .main-navigation {
+   transform: translateX(calc(-100% + 5px));
+}
+.dashboard-logo {
+   display: flex;
+   align-items: center;
+   font-size: 16px;
+   color: var(--secondary-color);
+   line-height: 1;
+   max-width: max-content;
+   padding-right: 30px;
+   padding-left: 15px;
+   border-bottom: 1px solid var(--secondary-color);
+}
+.pages-navigation-item {
+   position: relative;
+}
+.pages-navigation-item::before {
+   content: "";
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   display: block;
+   height: 100%;
+   width: 0px;
+   background-color: var(--secondary-color);
+   transition: 0.3s;
+}
+.pages-navigation-item:hover::before {
+   width: 100%;
+}
+.pages-navigation-link {
+   display: flex;
+   align-items: center;
+   height: 50px;
+   position: relative;
+   padding-left: 20px;
+   padding-right: 30px;
+}
+.pages-navigation-link.current {
+   background-color: var(--secondary-color);
+   color: var(--primary-color);
+}
+.dashboard-sidebar.hidden .pages-navigation-link span {
+   max-width: 0px;
+   padding-left: 0px;
+   padding-right: 0px;
+}
+.dashboard-btn {
+   display: flex;
+   position: absolute;
+   top: 0px;
+   right: -55px;
+   justify-content: center;
+   align-items: center;
+   height: 50px;
+   max-height: 50px;
+   width: 50px;
+   max-width: 50px;
+   border: none;
+   background-color: transparent;
+   padding: 8px;
+   cursor: pointer;
+}
+.dashboard-btn svg {
+   fill: var(--primary-color);
+   transform: scale(1.5);
+}
