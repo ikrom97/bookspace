@@ -79,6 +79,7 @@ if (header) {
   var searchForm = header.querySelector('.search-form'),
       searchInput = searchForm.querySelector('.search-input'),
       searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchResult = header.querySelector('.search-result'),
       feedbackModal = header.querySelector('.feedback-modal'),
       feedbackBtn = header.querySelector('.feedback'); //* search start
 
@@ -97,9 +98,27 @@ if (header) {
     if (e.target.dataset.family != 'search') {
       searchForm.classList.remove('opened');
       searchForm.reset();
+      searchResult.innerHTML = '';
     }
-  }); //* search end
+  });
+
+  searchInput.onkeyup = function (e) {
+    e.preventDefault();
+    var keyword = searchInput.value;
+    $.ajax({
+      url: "/search?keyword=".concat(keyword),
+      success: function success(result) {
+        searchResult.innerHTML = result;
+        var feedbackButton = header.querySelector('.feedback');
+
+        feedbackButton.onclick = function () {
+          feedbackModal.classList.remove('hidden');
+        };
+      }
+    });
+  }; //* search end
   //* countdown time  
+
 
   var timesLeftEl = document.querySelector('.taken-book-deadline');
   ;

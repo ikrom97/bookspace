@@ -5,6 +5,7 @@ if (header) {
    const searchForm = header.querySelector('.search-form'),
       searchInput = searchForm.querySelector('.search-input'),
       searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchResult = header.querySelector('.search-result'),
       feedbackModal = header.querySelector('.feedback-modal'),
       feedbackBtn = header.querySelector('.feedback');
    //* search start
@@ -21,8 +22,28 @@ if (header) {
       if (e.target.dataset.family != 'search') {
          searchForm.classList.remove('opened');
          searchForm.reset();
+         searchResult.innerHTML = '';
       }
    });
+
+   searchInput.onkeyup = e => {
+      e.preventDefault();
+      const keyword = searchInput.value;
+      $.ajax({
+         url: `/search?keyword=${keyword}`,
+
+         success: function (result) {
+
+            searchResult.innerHTML = result;
+
+            const feedbackButton = header.querySelector('.feedback');
+
+            feedbackButton.onclick = () => {
+               feedbackModal.classList.remove('hidden');
+            }
+         }
+      })
+   }
    //* search end
    //* countdown time  
    const timesLeftEl = document.querySelector('.taken-book-deadline');
@@ -40,25 +61,25 @@ if (header) {
          eventTime = eventDate.getTime(),
          remTime = eventTime - currentTime
 
-         let sec = Math.floor(remTime / 1000);
-         let min = Math.floor(sec / 60);
-         let hour = Math.floor(min / 60);
-         let day = Math.floor(hour / 24);
+      let sec = Math.floor(remTime / 1000);
+      let min = Math.floor(sec / 60);
+      let hour = Math.floor(min / 60);
+      let day = Math.floor(hour / 24);
 
-         hour %= 24;
-         min %= 60;
-         sec %= 60;
+      hour %= 24;
+      min %= 60;
+      sec %= 60;
 
-         hour = (hour < 10) ? "0" + hour : hour;
-         min = (min < 10) ? "0" + min : min;
-         sec = (sec < 10) ? "0" + sec : sec;
+      hour = (hour < 10) ? "0" + hour : hour;
+      min = (min < 10) ? "0" + min : min;
+      sec = (sec < 10) ? "0" + sec : sec;
 
-         daysEl.textContent = day;
-         hoursEl.textContent = hour;
-         minutesEl.textContent = min;
-         secondsEl.textContent = sec;
+      daysEl.textContent = day;
+      hoursEl.textContent = hour;
+      minutesEl.textContent = min;
+      secondsEl.textContent = sec;
 
-         setTimeout(countdown, 1000);
+      setTimeout(countdown, 1000);
    };
    if (timesLeftEl) {
       countdown();

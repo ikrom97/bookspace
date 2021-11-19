@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Feedback;
 use App\Models\Notification;
 use App\Models\User;
@@ -12,7 +13,13 @@ class MainController extends Controller
 {
    public function search(Request $request)
    {
-      return back();
+      $keyword = $request->keyword;
+      $books = Book::select('id', 'category_id', 'title', 'author', 'trashed')
+         ->where('trashed', false)
+         ->where('title', 'like', '%' . $keyword . '%')
+         ->paginate(9);
+
+      return view('layouts.search-result', compact('books'));
    }
 
    public function feedbackSend(Request $request)
@@ -136,6 +143,5 @@ class MainController extends Controller
       } else {
          return redirect()->to(url()->previous() . '#profile-password')->with('fail', 'Неправильный пароль попробуйте ещё!');
       }
-
    }
 }

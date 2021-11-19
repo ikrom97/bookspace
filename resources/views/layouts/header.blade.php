@@ -5,16 +5,18 @@
             <img class="main-logo" src="{{asset('img/main-logo.png')}}" alt="AtS Book Space">
             {{$site->title}}
          </a>
-         <div class="search">
-            <form class="search-form" action="{{route('search')}}" data-family="search" method="get">
-               @csrf
-               <input class="search-input" data-family="search" type="search" name="keyword" placeholder="Поиск...">
-               <button class="search-submit-btn" data-family="search" type="submit">
-                  <svg class="search-icon" data-family="search" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-family="search" d="M17 17L22 22M19.5 10.75C19.5 15.5825 15.5825 19.5 10.75 19.5C5.91751 19.5 2 15.5825 2 10.75C2 5.91751 5.91751 2 10.75 2C15.5825 2 19.5 5.91751 19.5 10.75Z" stroke="#fff " stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  <svg class="search-close-icon" data-family="search" width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g data-family="search" data-name="Layer 2"><g data-family="search" data-name="close"><rect data-family="search" width="24" height="24" transform="rotate(180 12 12)" opacity="0"/><path data-family="search" d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z"/></g></g></svg>
-               </button>
-            </form>
-            <ul class="search-result"></ul>
+         <div class="search-wrap">
+            <div class="search">
+               <form class="search-form" action="{{route('search')}}" data-family="search" method="get">
+                  @csrf
+                  <input class="search-input" data-family="search" type="search" name="keyword" placeholder="Поиск..." autocomplete="off">
+                  <button class="search-submit-btn" data-family="search" type="submit">
+                     <svg class="search-icon" data-family="search" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-family="search" d="M17 17L22 22M19.5 10.75C19.5 15.5825 15.5825 19.5 10.75 19.5C5.91751 19.5 2 15.5825 2 10.75C2 5.91751 5.91751 2 10.75 2C15.5825 2 19.5 5.91751 19.5 10.75Z" stroke="#fff " stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                     <svg class="search-close-icon" data-family="search" width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g data-family="search" data-name="Layer 2"><g data-family="search" data-name="close"><rect data-family="search" width="24" height="24" transform="rotate(180 12 12)" opacity="0"/><path data-family="search" d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z"/></g></g></svg>
+                  </button>
+               </form>
+            </div>
+            <ul class="search-result" data-family="search"></ul>
          </div>
          <a class="notification-link" href="{{route('notifications')}}">
             <svg class="notification-icon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bell" class="svg-inline--fa fa-bell fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
