@@ -8,6 +8,8 @@ use App\Models\Book;
 use App\Models\BookedBook;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Feedback;
+use App\Models\Notification;
 use App\Models\Presentation;
 use App\Models\TakenBook;
 use App\Models\User;
@@ -38,7 +40,46 @@ class PagesController extends Controller
 
    public function notifications()
    {
-      return view('pages.notifications.index');
+      $notifications = User::find(session('loggedUser'))
+         ->notifications()->orderBy('new', 'desc')
+         ->orderBy('created_at', 'desc')->paginate(16);
+
+      $rank = $notifications->firstItem();
+
+      return view('pages.notifications.index', compact('notifications', 'rank'));
+   }
+
+   public function notificationsRead(Notification $notification)
+   {
+      $user = User::find(session('loggedUser'));
+      
+      if ($notification->new) {
+         $notification->new = false;
+         $notification->save();
+      }
+
+      switch ($notification->type) {
+         case 'presentation';
+         case 'presentation_accepted';
+         case 'presentation_denied':
+            $presentation = Presentation::find($notification->type_id);
+
+            return view('pages.notifications.read', compact('presentation'));
+            break;
+
+         case 'feedback';
+         case 'feedback_answered':
+            $feedback = Feedback::find($notification->type_id);
+
+            return view('pages.notifications.read', compact('feedback'));
+            break;
+
+         case 'booked_book_deleted':
+            $book = Book::find($notification->type_id);
+
+            return view('pages.notifications.read', compact('book'));
+            break;
+      }
    }
 
    public function accountActivities()

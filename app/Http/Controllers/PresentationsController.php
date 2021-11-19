@@ -39,7 +39,7 @@ class PresentationsController extends Controller
       ]);
       // Store presentation
       $file = $request->file('presentation');
-      $path = public_path('presentations');
+      $path = public_path('files');
       $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
       $file->move($path, $fileName);
       // Store presentation table 
@@ -70,5 +70,54 @@ class PresentationsController extends Controller
       else {
          return back()->with('fail', 'Что-то пошло не так попробуйте позже!');
       }
+   }
+
+   public function accept(Presentation $presentation)
+   {
+      $presentation->accepted = true;
+      $presentation->denied = false;
+      $presentation->save();
+
+      $notification = new Notification;
+      $notification->type = 'presentation_accepted';
+      $notification->type_id = $presentation->id;
+      $notification->save();
+
+      $userId = $presentation->user->id;
+      $user = User::find($userId);
+      $user->notifications()->attach($notification->id);
+
+      return back()->with('success', 'Операция прошла успешно. Презентация подтверждена!');
+   }
+
+   public function deny(Presentation $presentation)
+   {
+      $presentation->denied = true;
+      $presentation->accepted = false;
+      $presentation->save();
+
+      $notification = new Notification;
+      $notification->type = 'presentation_denied';
+      $notification->type_id = $presentation->id;
+      $notification->save();
+
+      $userId = $presentation->user->id;
+      $user = User::find($userId);
+      $user->notifications()->attach($notification->id);
+
+      return back()->with('success', 'Операция прошла успешно. Презентация отклонена!');
+   }
+
+   public function download(Presentation $presentation)
+   {
+      $file = public_path() . '/files/' . $presentation->presentation;
+
+      $extension = pathinfo($file, PATHINFO_EXTENSION);
+
+      $headers = array(
+         'Content-Type: application/' . $extension,
+      );
+
+      return response()->download($file, $presentation->presentation, $headers);
    }
 }

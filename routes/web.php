@@ -20,6 +20,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
    Route::get('/about', [PagesController::class, 'about'])->name('about');
 
    Route::get('/notifications', [PagesController::class, 'notifications'])->name('notifications');
+   Route::get('/notifications/{notification}', [PagesController::class, 'notificationsRead'])->name('notifications.read');
 
    Route::get('/account/activities', [PagesController::class, 'accountActivities'])->name('account.activities');
    Route::get('/account/booked-books', [PagesController::class, 'accountBookedBooks'])->name('account.bookedBooks');
@@ -62,4 +63,12 @@ Route::group(['middleware' => ['AuthCheck']], function () {
    Route::post('/presentations/send', [PresentationsController::class, 'send'])->name('presentations.send');
    // activity routes
    Route::get('/activity/participate', [ActivitiesController::class, 'participate'])->name('activities.participate');
+
+   // Admin routes
+   Route::group(['middleware' => ['AdminCheck']], function () {
+      Route::get('/presentations/accept/{presentation}', [PresentationsController::class, 'accept'])->name('presentations.accept');
+      Route::get('/presentations/deny/{presentation}', [PresentationsController::class, 'deny'])->name('presentations.deny');
+      Route::get('/presentations/download/{presentation}', [PresentationsController::class, 'download'])->name('presentations.download');
+      Route::post('/feedback/answer', [MainController::class, 'feedbackAnswer'])->name('feedback.answer');
+   });
 });

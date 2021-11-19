@@ -37,6 +37,26 @@ class MainController extends Controller
       return back()->with('success', 'Ваше сообщение отправлено!');
    }
 
+   public function feedbackAnswer(Request $request)
+   {
+      $answer = $request->answer;
+
+      $feedback = Feedback::find($request->feedback);
+
+      $feedback->feedback = $answer;
+      $feedback->save();
+
+      $notification = new Notification;
+      $notification->type = 'feedback_answered';
+      $notification->type_id = $feedback->id;
+      $notification->save();
+
+      $user = User::find($request->user);
+      $user->notifications()->attach($notification->id);
+
+      return back()->with('success', 'Ваше сообщение отправлено!');
+   }
+
    public function updateAvatar(Request $request)
    {
       $request->validate([

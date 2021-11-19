@@ -380,6 +380,7 @@
    background-color: #f7f3ec;
    padding: 10px;
    min-height: 150px;
+   resize: none;
 }
 /* feedback modal end */
 /** header-bottom section end */
