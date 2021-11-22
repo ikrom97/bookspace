@@ -51,6 +51,7 @@ mix
    .styles([
       'resources/css/dashboard/master.css',
       'resources/css/dashboard/sidebar.css',
+      'resources/css/components/pagination.css',
       'resources/css/dashboard/activities/index.css',
       'resources/css/dashboard/activities/create.css',
       'resources/css/dashboard/activities/read.css',
@@ -58,7 +59,6 @@ mix
       'resources/css/dashboard/books/index.css',
       'resources/css/dashboard/books/create.css',
       'resources/css/dashboard/books/read.css',
-      'resources/css/dashboard/books/update.css',
       'resources/css/dashboard/news/index.css',
       'resources/css/dashboard/companies/index.css',
       'resources/css/dashboard/presentations/index.css',

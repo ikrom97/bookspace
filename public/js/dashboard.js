@@ -5,7 +5,20 @@ var __webpack_exports__ = {};
 /*!******************************************!*\
   !*** ./resources/js/dashboard/master.js ***!
   \******************************************/
+//* ajax request setup 
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+var body = document.querySelector('body'),
+    modals = body.querySelectorAll('.modal'); //* hide modals start
 
+body.addEventListener('click', function (e) {
+  modals.forEach(function (modal) {
+    modal.classList.add('hidden');
+  });
+}); //* hide modals end
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
@@ -18,8 +31,13 @@ var dashboardSidebar = document.querySelector('.dashboard-sidebar');
 if (dashboardSidebar) {
   var dashboardBtn = dashboardSidebar.querySelector('.dashboard-btn');
 
-  dashboardBtn.onclick = function () {
+  dashboardBtn.onclick = function (e) {
+    e.preventDefault();
     dashboardSidebar.classList.toggle('hidden');
+    $.ajax({
+      url: "/dashboard/sidebar",
+      success: function success(response) {}
+    });
   };
 }
 })();
@@ -77,7 +95,59 @@ if (dashboardSidebar) {
 /*!**********************************************!*\
   !*** ./resources/js/dashboard/books/read.js ***!
   \**********************************************/
+var bookReadPage = document.querySelector('.books-read-page');
 
+if (bookReadPage) {
+  var ratingWrap = bookReadPage.querySelector('.rating-wrap'),
+      ratingBtn = ratingWrap.querySelector('.book-link--rate'),
+      imageInputs = bookReadPage.querySelectorAll('.form-img-input'),
+      body = document.querySelector('body'); //* rating start
+
+  ratingBtn.onclick = function () {
+    ratingWrap.classList.toggle('open');
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'rating') {
+      ratingWrap.classList.remove('open');
+    }
+  }); //* rating end
+  //* tempstore books images start
+
+  imageInputs.forEach(function (imageInput) {
+    imageInput.onchange = function () {
+      var type = imageInput.dataset.type,
+          imageSize = imageInput.files[0].size / 1024,
+          label = bookReadPage.querySelector("[data-label=\"".concat(type, "\"]")),
+          file = new FormData();
+
+      if (imageSize > 200) {
+        label.classList.add('error');
+        return;
+      } else {
+        label.classList.remove('error');
+      }
+
+      file.append('file', imageInput.files[0]);
+      $.ajax({
+        type: 'POST',
+        enctype: 'multipart/form-data',
+        url: "/books/tempstore?type=".concat(type),
+        data: file,
+        processData: false,
+        contentType: false,
+        cache: false,
+        timeout: 600000,
+        success: function success(response) {
+          var images = bookReadPage.querySelectorAll("[data-img=\"".concat(type, "\"]"));
+          images.forEach(function (image) {
+            image.src = response;
+          });
+        }
+      });
+    };
+  }); //* tempstore books images end
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.

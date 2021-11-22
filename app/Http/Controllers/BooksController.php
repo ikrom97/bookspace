@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\BookedBook;
 use App\Models\Rating;
+use App\Models\TemporaryBooksImg;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -77,5 +78,87 @@ class BooksController extends Controller
       $book->save();
 
       return back()->with('success', 'Спасибо за отзыв!');
+   }
+
+   public function booksTempstore(Request $request)
+   {
+      // Store temporary
+      $type = $request->type;
+      $file = $request->file('file');
+      $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+      $temporaryImages = TemporaryBooksImg::first();
+      if ($temporaryImages) {
+         $path = public_path('img/books/temporary/' . $temporaryImages->$type);
+         if (file_exists($path)) {
+            unlink($path);
+         }
+         $temporaryImages->$type = $fileName;
+         $temporaryImages->save();
+         $path = public_path('img/books/temporary');
+         $file->move($path, $fileName);
+         return asset('img/books/temporary/' . $fileName);
+      } else {
+         $temporaryImages = new TemporaryBooksImg;
+         $temporaryImages->$type = $fileName;
+         $temporaryImages->save();
+         $path = public_path('img/books/temporary');
+         $file->move($path, $fileName);
+         return asset('img/books/temporary/' . $fileName);
+      }
+   }
+
+   public function update(Request $request)
+   {
+      // find book
+      $book = Book::find($request->input('book-id'));
+      // update books cover
+      $imgFront = $request->file('img-front');
+      $imgSide = $request->file('img-side');
+      $imgBack = $request->file('img-back');
+      $files = [$imgFront, $imgSide, $imgBack];
+      foreach ($files as $key => $file) {
+         if ($file) {
+            // delete previous file
+            $columnName = 'img_front';
+            if ($key == 1) {
+               $columnName = 'img_side';
+            }
+            if ($key == 2) {
+               $columnName = 'img_back';
+            }
+            $path = public_path('img/books/' . $book->$columnName);
+            if (file_exists($path)) {
+               unlink($path);
+            }
+            // save new file
+            $path = public_path('img/books');
+            $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move($path, $fileName);
+            // edit books filename
+            $book->$columnName = $fileName;
+            $book->save();
+         }
+      }
+      // validation
+      $request->validate([
+         'title' => 'required',
+         'author' => 'required',
+         'pages' => 'required',
+         'category' => 'required',
+         'description' => 'required',
+      ]);
+      if ($request->code != $book->code) {
+         $request->validate(['code' => 'required|unique:books']);
+      }
+      // edit book
+      $book->title = $request->title;
+      $book->author = $request->author;
+      $book->pages = $request->pages;
+      $book->category_id = $request->category;
+      $book->code = $request->code;
+      $book->description = $request->description;
+      $book->save();
+
+      return redirect()->to(url()->previous() . '#update')->with('success', 'Книга успешно изменена!');
    }
 }
