@@ -41,6 +41,9 @@ class BooksSeeder extends Seeder
             $book->return_date = Carbon::now()->addDays($day);
             $book->deadline_renewed = $renew;
          }
+         $book->img_front = 'img-front.jpg';
+         $book->img_side = 'img-side.jpg';
+         $book->img_back = 'img-back.jpg';
          $book->category_id = $faker->numberBetween($min = 1, $max = 10);
          $book->title = $faker->realText($maxNbChars = 25);
          $book->author = $faker->name;

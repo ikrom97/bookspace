@@ -4,7 +4,7 @@
    <main class="books-read-page">
       <section class="toolbar">
          <div class="search-wrap">
-            <form class="search-form" action="{{route('dashboard.books.search')}}" method="get">
+            <form class="search-form" action="{{route('books.search')}}" method="get">
                @csrf
                <label class="search-label">
                   <span class="search-icon">
@@ -116,7 +116,6 @@
                         </ul>
                      </div>
                   </div>
-                  
                   <a class="book-link" href="{{route('books.booking', $book->id)}}">Забронировать</a>
                </div>
             </div>
@@ -184,6 +183,17 @@
                </div>
             </form>
          </section>
+      </div>
+      <div class="delete-modal hidden">
+         <form class="delete-form" action="{{route('books.delete')}}" method="post">
+            @csrf
+            <input name="book-id" type="hidden" value="{{$book->id}}">
+            <p class="delete-message">Вы действительно хотите удалить эту книгу?</p>
+            <div class="form-btn-wrapper">
+               <button class="button button--green" type="button">Отмена</button>
+               <button class="button button--red" type="submit">Удалить</button>
+            </div>
+         </form>
       </div>
    </main>
 @endsection

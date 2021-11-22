@@ -12,7 +12,7 @@
             <a class="pages-navigation-link {{$route == 'dashboard.users' || $route == 'dashboard.users.create' || $route == 'dashboard.read' ? 'current' : ''}}" href="{{route('dashboard.users')}}">Читатели</a>
          </li>
          <li class="pages-navigation-item">
-            <a class="pages-navigation-link" href="#">Новости</a>
+            <a class="pages-navigation-link {{$route == 'dashboard.news' || $route == 'dashboard.news.create' || $route == 'dashboard.news.read' ? 'current' : ''}}" href="{{route('dashboard.news')}}">Новости</a>
          </li>
          <li class="pages-navigation-item">
             <a class="pages-navigation-link" href="#">Презентации</a>

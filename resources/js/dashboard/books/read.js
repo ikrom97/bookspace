@@ -4,6 +4,8 @@ if (bookReadPage) {
    const ratingWrap = bookReadPage.querySelector('.rating-wrap'),
       ratingBtn = ratingWrap.querySelector('.book-link--rate'),
       imageInputs = bookReadPage.querySelectorAll('.form-img-input'),
+      deleteBtn = bookReadPage.querySelector('.toolbar-delete'),
+      deleteModal = bookReadPage.querySelector('.delete-modal'),
       body = document.querySelector('body');
    //* rating start
    ratingBtn.onclick = () => {
@@ -52,5 +54,15 @@ if (bookReadPage) {
       }
    })
    //* tempstore books images end
+   //* delete modal start
+   deleteBtn.onclick = () => {
+      deleteModal.classList.remove('hidden');
+   };
+   deleteModal.addEventListener('click', e => {
+      if (e.target.className == 'delete-modal' || e.target.className == 'button button--green') {
+         deleteModal.classList.add('hidden');
+      }
+   });
+   //* delete modal end
 }
 

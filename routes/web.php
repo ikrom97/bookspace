@@ -70,12 +70,13 @@ Route::group(['middleware' => ['AuthCheck']], function () {
       Route::get('/dashboard/books', [DashboardController::class, 'books'])->name('dashboard.books');
       Route::get('/dashboard/books-create', [DashboardController::class, 'booksCreate'])->name('dashboard.books.create');
       Route::get('/dashboard/books-read/{book}', [DashboardController::class, 'booksRead'])->name('dashboard.books.read');
-      Route::get('/dashboard/books/search', [DashboardController::class, 'booksSearch'])->name('dashboard.books.search');
-
+      
       Route::get('/dashboard/users', [DashboardController::class, 'users'])->name('dashboard.users');
       Route::get('/dashboard/users-create', [DashboardController::class, 'usersCreate'])->name('dashboard.users.create');
       Route::get('/dashboard/users-read/{user}', [DashboardController::class, 'usersRead'])->name('dashboard.users.read');
 
+      Route::get('/dashboard/news', [DashboardController::class, 'news'])->name('dashboard.news');
+      
       Route::get('/dashboard/sidebar', [DashboardController::class, 'sidebar'])->name('dashboard.sidebar');
       // presentations route
       Route::get('/presentations/accept/{presentation}', [PresentationsController::class, 'accept'])->name('presentations.accept');
@@ -83,7 +84,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
       Route::get('/presentations/download/{presentation}', [PresentationsController::class, 'download'])->name('presentations.download');
       // book routes
       Route::post('/books/tempstore', [BooksController::class, 'booksTempstore']);
+      Route::get('/books/search', [BooksController::class, 'search'])->name('books.search');
       Route::post('/books/update', [BooksController::class, 'update'])->name('books.update');
+      Route::post('/books/delete', [BooksController::class, 'delete'])->name('books.delete');
+      Route::post('/books/create', [BooksController::class, 'create'])->name('books.create');
       // main routes
       Route::post('/feedback/answer', [MainController::class, 'feedbackAnswer'])->name('feedback.answer');
    });

@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
    public function books()
    {
-      $quantity = Book::count();
+      $quantity = Book::where('trashed', false)->count();
 
       $books = Book::select('id', 'title', 'author', 'pages', 'rating', 'trashed')
          ->where('trashed', false)->orderBy('created_at', 'desc')
@@ -24,25 +24,27 @@ class DashboardController extends Controller
 
    public function booksCreate()
    {
-      $quantity = Book::count();
+      $quantity = Book::where('trashed', false)->count();
 
-      return view('dashboard.books.create', compact('quantity'));
+      $categories = Category::where('trashed', false)->get();
+
+      return view('dashboard.books.create', compact('quantity', 'categories'));
    }
 
    public function booksRead(Book $book)
    {
-      $quantity = Book::count();
+      $quantity = Book::where('trashed', false)->count();
 
-      $categories = Category::get();
+      $categories = Category::where('trashed', false)->get();
 
       return view('dashboard.books.read', compact('book', 'quantity', 'categories'));
    }
 
    public function booksUpdate(Book $book)
    {
-      $quantity = Book::count();
+      $quantity = Book::where('trashed', false)->count();
 
-      $categories = Category::get();
+      $categories = Category::where('trashed', false)->get();
 
       return view('dashboard.books.update', compact('book', 'quantity', 'categories'));
    }
@@ -65,6 +67,11 @@ class DashboardController extends Controller
    public function usersUpdate(User $user)
    {
       return view('dashboard.users.update', compact('user'));
+   }
+
+   public function news()
+   {
+      return view('dashboard.news.index');
    }
 
    public function sidebar()

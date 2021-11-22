@@ -118,7 +118,6 @@ mix
       'resources/js/dashboard/books/index.js',
       'resources/js/dashboard/books/create.js',
       'resources/js/dashboard/books/read.js',
-      'resources/js/dashboard/books/update.js',
       'resources/js/dashboard/news/index.js',
       'resources/js/dashboard/companies/index.js',
       'resources/js/dashboard/presentations/index.js',

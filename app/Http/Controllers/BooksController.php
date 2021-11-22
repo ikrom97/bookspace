@@ -161,4 +161,55 @@ class BooksController extends Controller
 
       return redirect()->to(url()->previous() . '#update')->with('success', 'Книга успешно изменена!');
    }
+
+   public function delete(Request $request)
+   {
+      $book = Book::find($request->input('book-id'));
+
+      $book->trashed = true;
+      $save = $book->save();
+
+      if ($save) {
+         return redirect(route('dashboard.books'))->with('success', 'Книга успешно удалена!');
+      } else {
+         return back()->with('fail', 'Что-то пошло не так попробуте позже!');
+      }
+   }
+
+   public function create(Request $request)
+   {
+      // validation
+      $request->validate([
+         'title' => 'required',
+         'author' => 'required',
+         'pages' => 'required',
+         'category' => 'required',
+         'code' => 'required|unique:books',
+         'description' => 'required',
+      ]);
+      // create book
+      $book = new Book;
+      if ($request->input('img-front')) {
+         $book->img_front = $request->input('img-front');
+      }
+      if ($request->input('img-side')) {
+         $book->img_side = $request->input('img-side');
+      }
+      if ($request->input('img-front')) {
+         $book->img_back = $request->input('img-back');
+      }
+      $book->title = $request->title;
+      $book->author = $request->author;
+      $book->pages = $request->pages;
+      $book->category_id = $request->category;
+      $book->code = $request->code;
+      $book->description = $request->description;
+      $save = $book->save();
+
+      if ($save) {
+         return back()->with('success', 'Книга успешно добавлена!');
+      } else {
+         return back()->with('fail', 'Что-то пошло не так попробуте позже!');
+      }
+   }
 }

@@ -5,6 +5,9 @@
       <section class="toolbar">
          
       </section>
-      <h1>Читатели</h1>
+      <div class="content">
+         <h1>Читатели</h1>
+
+      </div>
    </main>
 @endsection

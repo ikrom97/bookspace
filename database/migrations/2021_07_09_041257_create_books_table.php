@@ -20,9 +20,9 @@ class CreateBooksTable extends Migration
          $table->timestamp('taken_date')->nullable();
          $table->timestamp('return_date')->nullable();
          $table->boolean('deadline_renewed')->default(false);
-         $table->string('img_front')->default('img_front.jpg');
-         $table->string('img_back')->default('img_back.jpg');
-         $table->string('img_side')->default('img_side.jpg');
+         $table->string('img_front')->default('default-front.jpg');
+         $table->string('img_back')->default('default-back.jpg');
+         $table->string('img_side')->default('default-side.jpg');
          $table->string('title');
          $table->string('author');
          $table->bigInteger('pages');
