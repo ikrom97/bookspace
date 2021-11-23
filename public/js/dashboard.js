@@ -84,7 +84,12 @@ var booksPage = document.querySelector('.books-page');
 if (booksPage) {
   var deleteBtns = booksPage.querySelectorAll('[data-action="delete"]'),
       deleteModal = booksPage.querySelector('.delete-modal'),
-      deleteInput = deleteModal.querySelector('[data-id="book-id"]');
+      deleteInput = deleteModal.querySelector('[data-id="book-id"]'),
+      searchForm = booksPage.querySelector('.search-form'),
+      searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchInput = searchForm.querySelector('.search-input'),
+      searchResult = booksPage.querySelector('.search-result'),
+      body = document.querySelector('body');
   deleteBtns.forEach(function (button) {
     button.onclick = function () {
       deleteInput.value = button.dataset.book;
@@ -95,7 +100,30 @@ if (booksPage) {
     if (e.target.className == 'delete-modal' || e.target.className == 'button button--green') {
       deleteModal.classList.add('hidden');
     }
+  }); //* search start
+
+  searchBtn.onclick = function (e) {
+    e.preventDefault();
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'search') {
+      searchForm.reset();
+      searchResult.innerHTML = '';
+    }
   });
+
+  searchInput.onkeyup = function (e) {
+    e.preventDefault();
+    var keyword = searchInput.value;
+    $.ajax({
+      url: "/books/search?keyword=".concat(keyword),
+      success: function success(result) {
+        searchResult.innerHTML = result;
+      }
+    });
+  }; //* search end
+
 }
 })();
 
@@ -107,7 +135,12 @@ if (booksPage) {
 var booksCreatePage = document.querySelector('.books-create-page');
 
 if (booksCreatePage) {
-  var imageInputs = booksCreatePage.querySelectorAll('.form-img-input'); //* tempstore books images start
+  var imageInputs = booksCreatePage.querySelectorAll('.form-img-input'),
+      searchForm = booksCreatePage.querySelector('.search-form'),
+      searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchInput = searchForm.querySelector('.search-input'),
+      searchResult = booksCreatePage.querySelector('.search-result'),
+      body = document.querySelector('body'); //* tempstore books images start
 
   imageInputs.forEach(function (imageInput) {
     imageInput.onchange = function () {
@@ -142,6 +175,30 @@ if (booksCreatePage) {
       });
     };
   }); //* tempstore books images end
+  //* search start
+
+  searchBtn.onclick = function (e) {
+    e.preventDefault();
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'search') {
+      searchForm.reset();
+      searchResult.innerHTML = '';
+    }
+  });
+
+  searchInput.onkeyup = function (e) {
+    e.preventDefault();
+    var keyword = searchInput.value;
+    $.ajax({
+      url: "/books/search?keyword=".concat(keyword),
+      success: function success(result) {
+        searchResult.innerHTML = result;
+      }
+    });
+  }; //* search end
+
 }
 })();
 
@@ -158,6 +215,10 @@ if (bookReadPage) {
       imageInputs = bookReadPage.querySelectorAll('.form-img-input'),
       deleteBtn = bookReadPage.querySelector('.toolbar-delete'),
       deleteModal = bookReadPage.querySelector('.delete-modal'),
+      searchForm = bookReadPage.querySelector('.search-form'),
+      searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchInput = searchForm.querySelector('.search-input'),
+      searchResult = bookReadPage.querySelector('.search-result'),
       body = document.querySelector('body'); //* rating start
 
   ratingBtn.onclick = function () {
@@ -215,6 +276,30 @@ if (bookReadPage) {
       deleteModal.classList.add('hidden');
     }
   }); //* delete modal end
+  //* search start
+
+  searchBtn.onclick = function (e) {
+    e.preventDefault();
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'search') {
+      searchForm.reset();
+      searchResult.innerHTML = '';
+    }
+  });
+
+  searchInput.onkeyup = function (e) {
+    e.preventDefault();
+    var keyword = searchInput.value;
+    $.ajax({
+      url: "/books/search?keyword=".concat(keyword),
+      success: function success(result) {
+        searchResult.innerHTML = result;
+      }
+    });
+  }; //* search end
+
 }
 })();
 

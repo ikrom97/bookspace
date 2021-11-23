@@ -1,7 +1,12 @@
 const booksCreatePage = document.querySelector('.books-create-page');
 
 if (booksCreatePage) {
-   const imageInputs = booksCreatePage.querySelectorAll('.form-img-input');
+   const imageInputs = booksCreatePage.querySelectorAll('.form-img-input'),
+      searchForm = booksCreatePage.querySelector('.search-form'),
+      searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchInput = searchForm.querySelector('.search-input'),
+      searchResult = booksCreatePage.querySelector('.search-result'),
+      body = document.querySelector('body');
    //* tempstore books images start
    imageInputs.forEach(imageInput => {
       imageInput.onchange = () => {
@@ -38,4 +43,26 @@ if (booksCreatePage) {
       }
    })
    //* tempstore books images end
+   //* search start
+   searchBtn.onclick = e => {
+      e.preventDefault();
+   }
+   body.addEventListener('click', e => {
+      if (e.target.dataset.family != 'search') {
+         searchForm.reset();
+         searchResult.innerHTML = '';
+      }
+   });
+   searchInput.onkeyup = e => {
+      e.preventDefault();
+      const keyword = searchInput.value;
+      $.ajax({
+         url: `/books/search?keyword=${keyword}`,
+
+         success: function (result) {
+            searchResult.innerHTML = result;
+         }
+      })
+   }
+   //* search end
 }

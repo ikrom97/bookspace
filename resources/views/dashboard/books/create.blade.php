@@ -4,17 +4,17 @@
    <main class="books-create-page">
       <section class="toolbar">
          <div class="search-wrap">
-            <form class="search-form" action="{{route('books.search')}}" method="get">
+            <form class="search-form" data-family="search" action="{{route('books.search')}}" method="get">
                @csrf
-               <label class="search-label">
-                  <span class="search-icon">
-                     <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 17l5 5m-2.5-11.25a8.75 8.75 0 11-17.5 0 8.75 8.75 0 0117.5 0z" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+               <label class="search-label" data-family="search">
+                  <span class="search-icon" data-family="search">
+                     <svg data-family="search" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 17l5 5m-2.5-11.25a8.75 8.75 0 11-17.5 0 8.75 8.75 0 0117.5 0z" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   </span>
-                  <input class="search-input" type="search" name="keyword" placeholder="Поиск по книгам . . ." autocomplete="off">
+                  <input data-family="search" class="search-input" type="search" name="keyword" placeholder="Поиск по книгам . . ." autocomplete="off">
                </label>
-               <button class="search-submit-btn visually-hidden" type="submit"></button>
+               <button class="search-submit-btn visually-hidden" data-family="search" type="submit"></button>
             </form>
-            <ul class="search-result"></ul>
+            <ul class="search-result" data-family="search"></ul>
          </div>
          <div class="quantity">Книги: {{$quantity}}</div>
       </section>

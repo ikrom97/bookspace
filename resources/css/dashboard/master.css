@@ -660,6 +660,61 @@ input[type="search"]::-webkit-search-results-decoration {
 .toolbar-delete:hover {
    color: red;
 }
+.search-result {
+   display: flex;
+   flex-direction: column;
+   position: absolute;
+   bottom: 0px;
+   left: 0px;
+   width: 100%;
+   background-color: #fff;
+   transform: translateY(calc(100% + 5px));
+   box-shadow: 0px 6px 12px rgb(0 0 0 / 15%);
+   z-index: 4;
+}
+.search-result__link {
+   display: flex;
+   padding-top: 10px;
+   padding-right: 20px;
+   padding-bottom: 10px;
+   padding-left: 20px;
+   align-items: center;
+   gap: 10px;
+   height: 35px;
+   color: #7d7d7d;
+}
+.search-result__link:hover {
+   color: var(--secondary-color);
+}
+.search-result__more {
+   display: flex;
+   align-items: center;
+   gap: 20px;
+   justify-content: end;
+   flex-grow: 1;
+}
+.search-result__more svg {
+   display: block;
+   height: 20px;
+}
+.search-result__no-result {
+   color: #7d7d7d;
+   padding-top: 15px;
+   padding-right: 25px;
+   padding-bottom: 15px;
+   padding-left: 25px;
+}
+.search-result__no-result button {
+   position: static;
+   top: 0px;
+   left: 0px;
+   color: blueviolet;
+   text-decoration: underline;
+   width: max-content;
+   height: max-content;
+   transform: none;
+}
+/* search end */
 /*! toolbar section end */
 /*! delete-modal start */
 .delete-modal {

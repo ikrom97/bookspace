@@ -6,6 +6,10 @@ if (bookReadPage) {
       imageInputs = bookReadPage.querySelectorAll('.form-img-input'),
       deleteBtn = bookReadPage.querySelector('.toolbar-delete'),
       deleteModal = bookReadPage.querySelector('.delete-modal'),
+      searchForm = bookReadPage.querySelector('.search-form'),
+      searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchInput = searchForm.querySelector('.search-input'),
+      searchResult = bookReadPage.querySelector('.search-result'),
       body = document.querySelector('body');
    //* rating start
    ratingBtn.onclick = () => {
@@ -64,5 +68,27 @@ if (bookReadPage) {
       }
    });
    //* delete modal end
+   //* search start
+   searchBtn.onclick = e => {
+      e.preventDefault();
+   }
+   body.addEventListener('click', e => {
+      if (e.target.dataset.family != 'search') {
+         searchForm.reset();
+         searchResult.innerHTML = '';
+      }
+   });
+   searchInput.onkeyup = e => {
+      e.preventDefault();
+      const keyword = searchInput.value;
+      $.ajax({
+         url: `/books/search?keyword=${keyword}`,
+
+         success: function (result) {
+            searchResult.innerHTML = result;
+         }
+      })
+   }
+   //* search end
 }
 

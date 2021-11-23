@@ -212,4 +212,15 @@ class BooksController extends Controller
          return back()->with('fail', 'Что-то пошло не так попробуте позже!');
       }
    }
+
+   public function search(Request $request)
+   {
+      $keyword = $request->keyword;
+      $books = Book::select('id', 'category_id', 'title', 'author', 'trashed')
+         ->where('trashed', false)
+         ->where('title', 'like', '%' . $keyword . '%')
+         ->paginate(9);
+
+      return view('dashboard.books.search-result', compact('books'));
+   }
 }
