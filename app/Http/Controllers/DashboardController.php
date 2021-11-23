@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -40,18 +41,16 @@ class DashboardController extends Controller
       return view('dashboard.books.read', compact('book', 'quantity', 'categories'));
    }
 
-   public function booksUpdate(Book $book)
-   {
-      $quantity = Book::where('trashed', false)->count();
-
-      $categories = Category::where('trashed', false)->get();
-
-      return view('dashboard.books.update', compact('book', 'quantity', 'categories'));
-   }
-
    public function users()
    {
-      return view('dashboard.users.index');
+      $quantity = User::where('trashed', false)->count();
+
+      $users = User::select('id', 'company_id', 'name', 'surname', 'read_pages', 'trashed')
+         ->where('trashed', false)->orderBy('created_at', 'desc')->paginate(16)->fragment('users-title');
+
+      $rank = $users->firstItem();
+
+      return view('dashboard.users.index', compact('quantity', 'users', 'rank'));
    }
 
    public function usersCreate()
@@ -61,12 +60,11 @@ class DashboardController extends Controller
 
    public function usersRead(User $user)
    {
-      return view('dashboard.users.read', compact('user'));
-   }
+      $quantity = User::where('trashed', false)->count();
 
-   public function usersUpdate(User $user)
-   {
-      return view('dashboard.users.update', compact('user'));
+      $companies = Company::where('trashed', false)->get();
+
+      return view('dashboard.users.read', compact('user', 'quantity', 'companies'));
    }
 
    public function news()

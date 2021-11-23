@@ -9,7 +9,7 @@
             <a class="pages-navigation-link {{$route == 'dashboard.books' || $route == 'dashboard.books.create' || $route == 'dashboard.books.read' ? 'current' : ''}}" href="{{route('dashboard.books')}}">Книги</a>
          </li>
          <li class="pages-navigation-item">
-            <a class="pages-navigation-link {{$route == 'dashboard.users' || $route == 'dashboard.users.create' || $route == 'dashboard.read' ? 'current' : ''}}" href="{{route('dashboard.users')}}">Читатели</a>
+            <a class="pages-navigation-link {{$route == 'dashboard.users' || $route == 'dashboard.users.create' || $route == 'dashboard.users.read' ? 'current' : ''}}" href="{{route('dashboard.users')}}">Читатели</a>
          </li>
          <li class="pages-navigation-item">
             <a class="pages-navigation-link {{$route == 'dashboard.news' || $route == 'dashboard.news.create' || $route == 'dashboard.news.read' ? 'current' : ''}}" href="{{route('dashboard.news')}}">Новости</a>

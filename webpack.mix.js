@@ -68,7 +68,6 @@ mix
       'resources/css/dashboard/users/index.css',
       'resources/css/dashboard/users/create.css',
       'resources/css/dashboard/users/read.css',
-      'resources/css/dashboard/users/update.css',
       'resources/css/dashboard/library/index.css',
    ], 'public/css/dashboard.css')
 
@@ -127,7 +126,6 @@ mix
       'resources/js/dashboard/users/index.js',
       'resources/js/dashboard/users/create.js',
       'resources/js/dashboard/users/read.js',
-      'resources/js/dashboard/users/update.js',
       'resources/js/dashboard/library/index.js',
    ], 'public/js/dashboard.js')
 

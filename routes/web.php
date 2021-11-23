@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PresentationsController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -85,9 +86,15 @@ Route::group(['middleware' => ['AuthCheck']], function () {
       // book routes
       Route::post('/books/tempstore', [BooksController::class, 'booksTempstore']);
       Route::get('/books/search', [BooksController::class, 'search'])->name('books.search');
+      Route::post('/books/create', [BooksController::class, 'create'])->name('books.create');
       Route::post('/books/update', [BooksController::class, 'update'])->name('books.update');
       Route::post('/books/delete', [BooksController::class, 'delete'])->name('books.delete');
-      Route::post('/books/create', [BooksController::class, 'create'])->name('books.create');
+      // user routes
+      Route::get('/users/search', [UsersController::class, 'search'])->name('users.search');
+      Route::post('/users/create', [UsersController::class, 'create'])->name('users.create');
+      Route::post('/users/update', [UsersController::class, 'update'])->name('users.update');
+      Route::post('/users/delete', [UsersController::class, 'delete'])->name('users.delete');
+      Route::post('/users/tempstore', [UsersController::class, 'avatarTempstore']);
       // main routes
       Route::post('/feedback/answer', [MainController::class, 'feedbackAnswer'])->name('feedback.answer');
    });
