@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Company;
@@ -71,9 +72,29 @@ class DashboardController extends Controller
       return view('dashboard.users.read', compact('user', 'quantity', 'companies'));
    }
 
-   public function news()
+   public function banners()
    {
-      return view('dashboard.news.index');
+      $quantity = Banner::where('trashed', false)->count();
+
+      $banners = Banner::where('trashed', false)->paginate(16);
+
+      $rank = $banners->firstItem();
+
+      return view('dashboard.banners.index', compact('quantity', 'banners', 'rank'));
+   }
+
+   public function bannersCreate()
+   {
+      $quantity = Banner::where('trashed', false)->count();
+
+      return view('dashboard.banners.create', compact('quantity'));
+   }
+
+   public function bannersRead(Banner $banner)
+   {
+      $quantity = Banner::where('trashed', false)->count();
+
+      return view('dashboard.banners.read', compact('quantity', 'banner'));
    }
 
    public function sidebar()

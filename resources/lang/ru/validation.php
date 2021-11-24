@@ -174,6 +174,7 @@ return [
       'presentation' => 'презентация',
       'avatar' => 'аватар',
       'company' => 'компания',
+      'banner' => 'баннер',
    ],
 
 ];

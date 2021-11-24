@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActivitiesController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BannersController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
@@ -76,6 +77,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
       Route::get('/dashboard/users-create', [DashboardController::class, 'usersCreate'])->name('dashboard.users.create');
       Route::get('/dashboard/users-read/{user}', [DashboardController::class, 'usersRead'])->name('dashboard.users.read');
 
+      Route::get('/dashboard/banners', [DashboardController::class, 'banners'])->name('dashboard.banners');
+      Route::get('/dashboard/bannersCreate', [DashboardController::class, 'bannersCreate'])->name('dashboard.banners.create');
+      Route::get('/dashboard/bannersRead/{banner}', [DashboardController::class, 'bannersRead'])->name('dashboard.banners.read');
+
       Route::get('/dashboard/news', [DashboardController::class, 'news'])->name('dashboard.news');
       
       Route::get('/dashboard/sidebar', [DashboardController::class, 'sidebar'])->name('dashboard.sidebar');
@@ -95,6 +100,11 @@ Route::group(['middleware' => ['AuthCheck']], function () {
       Route::post('/users/update', [UsersController::class, 'update'])->name('users.update');
       Route::post('/users/delete', [UsersController::class, 'delete'])->name('users.delete');
       Route::post('/users/tempstore', [UsersController::class, 'avatarTempstore']);
+      // banner routes
+      Route::get('/banners/search', [BannersController::class, 'search'])->name('banners.search');
+      Route::post('/banners/create', [BannersController::class, 'create'])->name('banners.create');
+      Route::post('/banners/update', [BannersController::class, 'update'])->name('banners.update');
+      Route::post('/banners/delete', [BannersController::class, 'delete'])->name('banners.delete');
       // main routes
       Route::post('/feedback/answer', [MainController::class, 'feedbackAnswer'])->name('feedback.answer');
    });

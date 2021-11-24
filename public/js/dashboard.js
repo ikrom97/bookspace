@@ -305,10 +305,148 @@ if (bookReadPage) {
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
-/*!**********************************************!*\
-  !*** ./resources/js/dashboard/news/index.js ***!
-  \**********************************************/
+/*!*************************************************!*\
+  !*** ./resources/js/dashboard/banners/index.js ***!
+  \*************************************************/
+var bannersPage = document.querySelector('.banners-page');
 
+if (bannersPage) {
+  var deleteBtns = bannersPage.querySelectorAll('[data-action="delete"]'),
+      deleteModal = bannersPage.querySelector('.delete-modal'),
+      deleteInput = deleteModal.querySelector('[data-id="banner-id"]'),
+      searchForm = bannersPage.querySelector('.search-form'),
+      searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchInput = searchForm.querySelector('.search-input'),
+      searchResult = bannersPage.querySelector('.search-result'),
+      body = document.querySelector('body'); //* delete banner start
+
+  deleteBtns.forEach(function (button) {
+    button.onclick = function () {
+      deleteInput.value = button.dataset.banner;
+      deleteModal.classList.remove('hidden');
+    };
+  });
+  deleteModal.addEventListener('click', function (e) {
+    if (e.target.className == 'delete-modal' || e.target.className == 'button button--green') {
+      deleteModal.classList.add('hidden');
+    }
+  }); //* delete banner end
+  //* search start
+
+  searchBtn.onclick = function (e) {
+    e.preventDefault();
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'search') {
+      searchForm.reset();
+      searchResult.innerHTML = '';
+    }
+  });
+
+  searchInput.onkeyup = function (e) {
+    e.preventDefault();
+    var keyword = searchInput.value;
+    $.ajax({
+      url: "/banners/search?keyword=".concat(keyword),
+      success: function success(result) {
+        searchResult.innerHTML = result;
+      }
+    });
+  }; //* search end
+
+}
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!**************************************************!*\
+  !*** ./resources/js/dashboard/banners/create.js ***!
+  \**************************************************/
+var bannersCreatePage = document.querySelector('.banners-create-page');
+
+if (bannersCreatePage) {
+  var searchForm = bannersCreatePage.querySelector('.search-form'),
+      searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchInput = searchForm.querySelector('.search-input'),
+      searchResult = bannersCreatePage.querySelector('.search-result'),
+      body = document.querySelector('body'); //* search start
+
+  searchBtn.onclick = function (e) {
+    e.preventDefault();
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'search') {
+      searchForm.reset();
+      searchResult.innerHTML = '';
+    }
+  });
+
+  searchInput.onkeyup = function (e) {
+    e.preventDefault();
+    var keyword = searchInput.value;
+    $.ajax({
+      url: "/banners/search?keyword=".concat(keyword),
+      success: function success(result) {
+        searchResult.innerHTML = result;
+      }
+    });
+  }; //* search end
+
+}
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!************************************************!*\
+  !*** ./resources/js/dashboard/banners/read.js ***!
+  \************************************************/
+var bannersReadPage = document.querySelector('.banners-read-page');
+
+if (bannersReadPage) {
+  var deleteBtn = bannersReadPage.querySelector('.toolbar-delete'),
+      deleteModal = bannersReadPage.querySelector('.delete-modal'),
+      searchForm = bannersReadPage.querySelector('.search-form'),
+      searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchInput = searchForm.querySelector('.search-input'),
+      searchResult = bannersReadPage.querySelector('.search-result'),
+      body = document.querySelector('body'); //* delete modal start
+
+  deleteBtn.onclick = function () {
+    deleteModal.classList.remove('hidden');
+  };
+
+  deleteModal.addEventListener('click', function (e) {
+    if (e.target.className == 'delete-modal' || e.target.className == 'button button--green') {
+      deleteModal.classList.add('hidden');
+    }
+  }); //* delete modal end
+  //* search start
+
+  searchBtn.onclick = function (e) {
+    e.preventDefault();
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'search') {
+      searchForm.reset();
+      searchResult.innerHTML = '';
+    }
+  });
+
+  searchInput.onkeyup = function (e) {
+    e.preventDefault();
+    var keyword = searchInput.value;
+    $.ajax({
+      url: "/banners/search?keyword=".concat(keyword),
+      success: function success(result) {
+        searchResult.innerHTML = result;
+      }
+    });
+  }; //* search end
+
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.

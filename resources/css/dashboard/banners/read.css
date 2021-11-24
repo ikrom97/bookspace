@@ -1,0 +1,14 @@
+/** banner-read section start */
+.banner-read {
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+   background-color: #fff;
+   border-radius: 15px;
+}
+.banner-info {
+   margin-left: 25px;
+   margin-bottom: 30px;
+   width: 50%;
+}
+/** banner-read section end */

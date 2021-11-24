@@ -98,6 +98,12 @@ class UsersController extends Controller
       if ($request->file('avatar')) {
          $file = $request->file('avatar');
          $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+
+         $path = public_path('img/users/' . $user->avatar);
+         if (file_exists($path)) {
+            unlink($path);
+         }
+
          $path = public_path('img/users');
          $file->move($path, $fileName);
          $user->avatar = $fileName;

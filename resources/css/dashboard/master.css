@@ -816,6 +816,42 @@ input[type="search"]::-webkit-search-results-decoration {
 .img-awarn {
    font-size: 12px;
 }
+.form-banner-label {
+   position: relative;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   gap: 5px;
+}
+.form-banner-label::after {
+   content: "+";
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 80px;
+   color: #fff;
+   background-color: rgba(0, 0, 0, 20%);
+   position: absolute;
+   top: 24px;
+   left: 0px;
+   width: 100%;
+   height: calc(100% - 46px);
+   opacity: 0;
+   cursor: pointer;
+   transition: 0.3s;
+}
+.form-banner-label:hover::after {
+   opacity: 1;
+}
+.form-banner {
+   width: 100%;
+}
+.form-banner-label.error {
+   color: red;
+}
+.form-avatar-label.error img {
+   border: 1px solid red;
+}
 /*! book-update section end */
 /*! users update section start */
 .form-avatar-wrap {
