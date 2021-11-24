@@ -173,6 +173,7 @@ return [
       'description' => 'описание',
       'presentation' => 'презентация',
       'avatar' => 'аватар',
+      'company' => 'компания',
    ],
 
 ];

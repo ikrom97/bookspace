@@ -409,7 +409,71 @@ if (usersPage) {
 /*!************************************************!*\
   !*** ./resources/js/dashboard/users/create.js ***!
   \************************************************/
+var userCreatePage = document.querySelector('.users-create-page');
 
+if (userCreatePage) {
+  var searchForm = userCreatePage.querySelector('.search-form'),
+      searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchInput = searchForm.querySelector('.search-input'),
+      searchResult = userCreatePage.querySelector('.search-result'),
+      imageInput = userCreatePage.querySelector('.form-img-input'),
+      body = document.querySelector('body'); //* search start
+
+  searchBtn.onclick = function (e) {
+    e.preventDefault();
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'search') {
+      searchForm.reset();
+      searchResult.innerHTML = '';
+    }
+  });
+
+  searchInput.onkeyup = function (e) {
+    e.preventDefault();
+    var keyword = searchInput.value;
+    $.ajax({
+      url: "/users/search?keyword=".concat(keyword),
+      success: function success(result) {
+        searchResult.innerHTML = result;
+      }
+    });
+  }; //* search end
+  //* tempstore books images start
+
+
+  imageInput.onchange = function () {
+    var imageSize = imageInput.files[0].size / 1024,
+        avatarWrap = userCreatePage.querySelector('.form-avatar-wrap'),
+        file = new FormData();
+
+    if (imageSize > 200) {
+      avatarWrap.classList.add('error');
+      return;
+    } else {
+      avatarWrap.classList.remove('error');
+    }
+
+    file.append('file', imageInput.files[0]);
+    $.ajax({
+      type: 'POST',
+      enctype: 'multipart/form-data',
+      url: '/users/tempstore',
+      data: file,
+      processData: false,
+      contentType: false,
+      cache: false,
+      timeout: 600000,
+      success: function success(response) {
+        console.log(response);
+        var image = userCreatePage.querySelector('.form-avatar');
+        image.src = response;
+      }
+    });
+  }; //* tempstore books images end
+
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.

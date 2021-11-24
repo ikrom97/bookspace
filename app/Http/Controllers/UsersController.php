@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\TempAvatar;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use App\Mail\SendCredentials;
 
 class UsersController extends Controller
 {
@@ -24,7 +28,49 @@ class UsersController extends Controller
 
    public function create(Request $request)
    {
-      // code
+      // validation
+      $request->validate([
+         'name' => 'required',
+         'surname' => 'required',
+         'last_name' => 'required',
+         'role' => 'required',
+         'login' => 'required|unique:users',
+         'email' => 'required|email',
+         'phone' => 'required|numeric|digits:9',
+         'company' => 'required',
+         'description' => 'required',
+      ]);
+      // create new user
+      $user = new User;
+      if ($request->file('avatar')) {
+         $file = $request->file('avatar');
+         $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+         $path = public_path('img/users');
+         $file->move($path, $fileName);
+         $user->avatar = $fileName;
+      }
+      $user->name = $request->name;
+      $user->surname = $request->surname;
+      $user->last_name = $request->last_name;
+      $user->role = $request->role;
+      $user->email = $request->email;
+      $user->login = $request->login;
+
+      $password = Str::random(9);
+      $user->password = Hash::make($password);
+      $details = ['login' => $user->login, 'password' => $password];
+      Mail::to($user->email)->send(new SendCredentials($details));
+
+      $user->phone = $request->phone;
+      $user->company_id = $request->company;
+      $user->description = $request->description;
+      $save = $user->save();
+
+      if ($save) {
+         return back()->with('success', 'Вы успешно добавили нового пользователя');
+      } else {
+         return back()->with('fail', 'Что-то пошло не так попробуте позже!');
+      }
    }
 
    public function update(Request $request)

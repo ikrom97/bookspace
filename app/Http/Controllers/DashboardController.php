@@ -55,7 +55,11 @@ class DashboardController extends Controller
 
    public function usersCreate()
    {
-      return view('dashboard.users.create');
+      $quantity = User::where('trashed', false)->count();
+
+      $companies = Company::where('trashed', false)->get();
+
+      return view('dashboard.users.create', compact('quantity', 'companies'));
    }
 
    public function usersRead(User $user)
