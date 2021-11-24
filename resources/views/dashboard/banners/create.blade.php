@@ -34,7 +34,6 @@
             </li>
          </ul>
          <section class="banner-update">
-            <h2 class="title">Редактировать баннер</h2>
             <form class="form" action="{{route('banners.create')}}" method="post" enctype="multipart/form-data">
                @csrf
                <label class="form-banner-label">Баннер

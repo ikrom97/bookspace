@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Presentation;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -95,6 +96,37 @@ class DashboardController extends Controller
       $quantity = Banner::where('trashed', false)->count();
 
       return view('dashboard.banners.read', compact('quantity', 'banner'));
+   }
+
+   public function presentations()
+   {
+      $quantity = Presentation::where('trashed', false)->count();
+
+      $presentations = Presentation::where('trashed', false)->orderBy('created_at', 'desc')->paginate(16);
+
+      $rank = $presentations->firstItem();
+
+      return view('dashboard.presentations.index', compact('quantity', 'presentations', 'rank'));
+   }
+
+   public function presentationsCreate()
+   {
+      $quantity = Presentation::where('trashed', false)->count();
+
+      $books = Book::select('id', 'title', 'code', 'trashed')->where('trashed', false)->get();
+
+      $users = User::select('id', 'surname', 'name', 'trashed')->where('trashed', false)->get();
+
+      return view('dashboard.presentations.create', compact('quantity', 'books', 'users'));
+   }
+
+   public function presentationsRead($id)
+   {
+      $quantity = Presentation::where('trashed', false)->count();
+
+      $presentation = Presentation::find($id);
+
+      return view('dashboard.presentations.read', compact('quantity', 'presentation'));
    }
 
    public function sidebar()

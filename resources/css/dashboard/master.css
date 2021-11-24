@@ -516,13 +516,11 @@ input[type="search"]::-webkit-search-results-decoration {
 .presentation {
    padding-top: 30px;
    padding-bottom: 30px;
+   display: flex;
+   flex-wrap: wrap;
 }
 .presentation.even {
    background-color: #f2f6f8;
-}
-.presentation__container {
-   display: flex;
-   flex-wrap: wrap;
 }
 .presentation-title {
    width: 100%;
@@ -908,6 +906,134 @@ input[type="search"]::-webkit-search-results-decoration {
    border: 1px solid red;
 }
 /*! users update section end */
+/*! dateTime picker start */
+.dtp_main {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   z-index: 1;
+   border: none;
+   height: 100%;
+   width: 100%;
+   color: transparent;
+   background-color: transparent;
+}
+.dtp_modal-content {
+   border-radius: 0px;
+   display: flex;
+   align-items: center;
+   box-shadow: 0 6px 12px rgb(0 0 0 / 15%);
+   height: 300px;
+   width: 600px;
+   position: fixed;
+   top: calc(50vh - 250px) !important;
+   left: calc(50vw - 300px) !important;
+}
+.dtp_modal-title {
+   display: none;
+}
+.dtp_modal-cell-date {
+   width: 50%;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   margin: 0px;
+}
+.dtp_modal-months {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 16px;
+   color: inherit;
+}
+.dtp_modal-calendar {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
+   font-size: 14px;
+   color: inherit;
+   margin: 0px;
+}
+.dtp_modal-cell-selected {
+   background-color: var(--secondary-color);
+   border-radius: 0px;
+   cursor: context-menu;
+}
+.dtp_modal-cell-time {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 50%;
+   border-right: none;
+   border-left: 1px dashed;
+}
+div#field-time {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   height: max-content;
+}
+div#time-line {
+   padding: 0px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 16px;
+   color: var(--primary-color);
+   font-weight: bold;
+}
+.dtp_modal-time-mechanic {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 15px;
+   width: 100%;
+}
+.dtp_modal-append {
+   padding: 0px;
+   color: #7d7d7d;
+}
+.dtp_modal-digits {
+   padding: 0px;
+}
+.dpt_modal-button {
+   border: none;
+   box-shadow: none;
+   border-radius: 0px;
+   display: flex;
+   margin: 0px;
+   background-color: #63a63e;
+   justify-content: center;
+   align-items: center;
+   font-size: 16px;
+   line-height: 1;
+   height: 35px;
+   color: transparent;
+   position: relative;
+   width: 60%;
+   transition: 0.3s;
+}
+.dpt_modal-button:hover {
+   box-shadow: 0px 6px 12px rgb(0 0 0 / 15%);
+}
+.dpt_modal-button::after {
+   content: "Выбрать";
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   height: 100%;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: #fff;
+}
+/*! dateTime picker end */
 .width-5 {
    width: 5%;
 }

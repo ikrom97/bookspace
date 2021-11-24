@@ -462,7 +462,54 @@ if (bannersReadPage) {
 /*!*******************************************************!*\
   !*** ./resources/js/dashboard/presentations/index.js ***!
   \*******************************************************/
+var presentationsPage = document.querySelector('.presentations-page');
 
+if (presentationsPage) {
+  var deleteBtns = presentationsPage.querySelectorAll('[data-action="delete"]'),
+      deleteModal = presentationsPage.querySelector('.delete-modal'),
+      deleteInput = deleteModal.querySelector('[data-id="presentation-id"]'),
+      searchForm = presentationsPage.querySelector('.search-form'),
+      searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchInput = searchForm.querySelector('.search-input'),
+      searchResult = presentationsPage.querySelector('.search-result'),
+      body = document.querySelector('body'); //* delete presentation start
+
+  deleteBtns.forEach(function (button) {
+    button.onclick = function () {
+      deleteInput.value = button.dataset.presentation;
+      deleteModal.classList.remove('hidden');
+    };
+  });
+  deleteModal.addEventListener('click', function (e) {
+    if (e.target.className == 'delete-modal' || e.target.className == 'button button--green') {
+      deleteModal.classList.add('hidden');
+    }
+  }); //* delete presentation end
+  //* search start
+
+  searchBtn.onclick = function (e) {
+    e.preventDefault();
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'search') {
+      searchForm.reset();
+      searchResult.innerHTML = '';
+    }
+  });
+
+  searchInput.onkeyup = function (e) {
+    e.preventDefault();
+    var keyword = searchInput.value;
+    $.ajax({
+      url: "/presentations/search?keyword=".concat(keyword),
+      success: function success(result) {
+        searchResult.innerHTML = result;
+      }
+    });
+  }; //* search end
+
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
@@ -470,7 +517,52 @@ if (bannersReadPage) {
 /*!********************************************************!*\
   !*** ./resources/js/dashboard/presentations/create.js ***!
   \********************************************************/
+var presentationsCreatePage = document.querySelector('.presentations-create-page');
 
+if (presentationsCreatePage) {
+  var searchForm = presentationsCreatePage.querySelector('.search-form'),
+      searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchInput = searchForm.querySelector('.search-input'),
+      searchResult = presentationsCreatePage.querySelector('.search-result'),
+      body = document.querySelector('body'); //* search start
+
+  searchBtn.onclick = function (e) {
+    e.preventDefault();
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'search') {
+      searchForm.reset();
+      searchResult.innerHTML = '';
+    }
+  });
+
+  searchInput.onkeyup = function (e) {
+    e.preventDefault();
+    var keyword = searchInput.value;
+    $.ajax({
+      url: "/banners/search?keyword=".concat(keyword),
+      success: function success(result) {
+        searchResult.innerHTML = result;
+      }
+    });
+  }; //* search end
+  //* datetime picker start
+
+
+  $('#picker').dateTimePicker({
+    dateFormat: "YYYY-MM-DD HH:mm",
+    locale: 'ru',
+    showTime: true,
+    selectData: "now",
+    positionShift: {
+      top: 20,
+      left: 0
+    },
+    title: "Select Date and Time",
+    buttonTitle: "Select"
+  }); //* datetime picker end
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
@@ -478,15 +570,65 @@ if (bannersReadPage) {
 /*!******************************************************!*\
   !*** ./resources/js/dashboard/presentations/read.js ***!
   \******************************************************/
+var presentationsPage = document.querySelector('.presentations-read-page');
 
-})();
+if (presentationsPage) {
+  var deleteBtn = presentationsPage.querySelector('.toolbar-delete'),
+      deleteModal = presentationsPage.querySelector('.delete-modal'),
+      searchForm = presentationsPage.querySelector('.search-form'),
+      searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchInput = searchForm.querySelector('.search-input'),
+      searchResult = presentationsPage.querySelector('.search-result'),
+      body = document.querySelector('body'); //* datetime picker start
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
-(() => {
-/*!********************************************************!*\
-  !*** ./resources/js/dashboard/presentations/update.js ***!
-  \********************************************************/
+  $('#picker').dateTimePicker({
+    dateFormat: "YYYY-MM-DD HH:mm",
+    locale: 'ru',
+    showTime: true,
+    selectData: "now",
+    positionShift: {
+      top: 20,
+      left: 0
+    },
+    title: "Select Date and Time",
+    buttonTitle: "Select"
+  }); //* datetime picker end
+  //* delete modal start
 
+  deleteBtn.onclick = function () {
+    deleteModal.classList.remove('hidden');
+  };
+
+  deleteModal.addEventListener('click', function (e) {
+    if (e.target.className == 'delete-modal' || e.target.className == 'button button--green') {
+      deleteModal.classList.add('hidden');
+    }
+  }); //* delete modal end
+  //* search start
+
+  searchBtn.onclick = function (e) {
+    e.preventDefault();
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'search') {
+      searchForm.reset();
+      searchResult.innerHTML = '';
+    }
+  });
+
+  searchInput.onkeyup = function (e) {
+    e.preventDefault();
+    var keyword = searchInput.value;
+    $.ajax({
+      url: "/presentations/search?keyword=".concat(keyword),
+      success: function success(result) {
+        searchResult.innerHTML = result;
+      }
+    });
+  }; //* search end
+
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.

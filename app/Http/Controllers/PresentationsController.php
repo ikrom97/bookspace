@@ -120,4 +120,92 @@ class PresentationsController extends Controller
 
       return response()->download($file, $presentation->presentation, $headers);
    }
+
+   public function search(Request $request)
+   {
+      $keyword = $request->keyword;
+      $presentations = Presentation::select('presentations.id', 'presentations.user_id', 'presentations.book_id', 'presentations.audience', 'presentations.trashed')
+         ->join('books', 'presentations.book_id', '=', 'books.id')
+         ->where('books.title', 'like', '%' . $keyword . '%')
+         ->orWhere('presentations.audience', 'like', '%' . $keyword . '%')
+         ->paginate(9);
+
+      return view('dashboard.presentations.search-result', compact('presentations'));
+   }
+
+   public function create(Request $request)
+   {
+      // validation
+      $request->validate([
+         'book' => 'required',
+         'user' => 'required',
+         'datetime' => 'required',
+         'audience' => 'required|min:3',
+         'participants' => 'required|integer|min:10',
+         'description' => 'required',
+         'presentation' => 'required',
+      ]);
+      // Store presentation
+      $file = $request->file('presentation');
+      $path = public_path('files');
+      $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+      $file->move($path, $fileName);
+      // Store presentation table 
+      $presentation = new Presentation;
+      $presentation->user_id = $request->user;
+      $presentation->book_id = $request->book;
+      $presentation->date = $request->datetime;
+      $presentation->audience = $request->audience;
+      $presentation->participants_quantity = $request->participants;
+      $presentation->description = $request->description;
+      $presentation->presentation = $fileName;
+      $presentation->accepted = true;
+      $save = $presentation->save();
+
+      if ($save) {
+         return back()->with('success', 'Презентация успешно добавлена!');
+      }
+      else {
+         return back()->with('fail', 'Что-то пошло не так попробуйте позже!');
+      }
+   }
+
+   public function update(Request $request)
+   {
+      // validation
+      $request->validate([
+         'datetime' => 'required',
+         'audience' => 'required|min:3',
+         'participants' => 'required|integer|min:10',
+         'description' => 'required',
+      ]);
+      // Store presentation table 
+      $presentation = Presentation::find($request->input('presentation-id'));
+      $presentation->date = $request->datetime;
+      $presentation->audience = $request->audience;
+      $presentation->participants_quantity = $request->participants;
+      $presentation->description = $request->description;
+      $save = $presentation->save();
+
+      if ($save) {
+         return back()->with('success', 'Презентация успешно изменена!');
+      }
+      else {
+         return back()->with('fail', 'Что-то пошло не так попробуйте позже!');
+      }
+   }
+
+   public function delete(Request $request)
+   {
+      $presentation = Presentation::find($request->input('presentation-id'));
+
+      $presentation->trashed = true;
+      $save = $presentation->save();
+
+      if ($save) {
+         return redirect(route('dashboard.presentations'))->with('success', 'Презентация успешно удалена!');
+      } else {
+         return back()->with('fail', 'Что-то пошло не так попробуте позже!');
+      }
+   }
 }

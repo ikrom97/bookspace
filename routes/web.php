@@ -78,16 +78,14 @@ Route::group(['middleware' => ['AuthCheck']], function () {
       Route::get('/dashboard/users-read/{user}', [DashboardController::class, 'usersRead'])->name('dashboard.users.read');
 
       Route::get('/dashboard/banners', [DashboardController::class, 'banners'])->name('dashboard.banners');
-      Route::get('/dashboard/bannersCreate', [DashboardController::class, 'bannersCreate'])->name('dashboard.banners.create');
-      Route::get('/dashboard/bannersRead/{banner}', [DashboardController::class, 'bannersRead'])->name('dashboard.banners.read');
+      Route::get('/dashboard/banners-create', [DashboardController::class, 'bannersCreate'])->name('dashboard.banners.create');
+      Route::get('/dashboard/banners-read/{banner}', [DashboardController::class, 'bannersRead'])->name('dashboard.banners.read');
 
-      Route::get('/dashboard/news', [DashboardController::class, 'news'])->name('dashboard.news');
-      
+      Route::get('/dashboard/presentations', [DashboardController::class, 'presentations'])->name('dashboard.presentations');
+      Route::get('/dashboard/presentations-create', [DashboardController::class, 'presentationsCreate'])->name('dashboard.presentations.create');
+      Route::get('/dashboard/presentations-read/{presentations}', [DashboardController::class, 'presentationsRead'])->name('dashboard.presentations.read');
+
       Route::get('/dashboard/sidebar', [DashboardController::class, 'sidebar'])->name('dashboard.sidebar');
-      // presentations route
-      Route::get('/presentations/accept/{presentation}', [PresentationsController::class, 'accept'])->name('presentations.accept');
-      Route::get('/presentations/deny/{presentation}', [PresentationsController::class, 'deny'])->name('presentations.deny');
-      Route::get('/presentations/download/{presentation}', [PresentationsController::class, 'download'])->name('presentations.download');
       // book routes
       Route::post('/books/tempstore', [BooksController::class, 'booksTempstore']);
       Route::get('/books/search', [BooksController::class, 'search'])->name('books.search');
@@ -105,6 +103,14 @@ Route::group(['middleware' => ['AuthCheck']], function () {
       Route::post('/banners/create', [BannersController::class, 'create'])->name('banners.create');
       Route::post('/banners/update', [BannersController::class, 'update'])->name('banners.update');
       Route::post('/banners/delete', [BannersController::class, 'delete'])->name('banners.delete');
+      // presentations routes
+      Route::get('/presentations/accept/{presentation}', [PresentationsController::class, 'accept'])->name('presentations.accept');
+      Route::get('/presentations/deny/{presentation}', [PresentationsController::class, 'deny'])->name('presentations.deny');
+      Route::get('/presentations/download/{presentation}', [PresentationsController::class, 'download'])->name('presentations.download');
+      Route::get('/presentations/search', [PresentationsController::class, 'search'])->name('presentations.search');
+      Route::post('/presentations/create', [PresentationsController::class, 'create'])->name('presentations.create');
+      Route::post('/presentations/update', [PresentationsController::class, 'update'])->name('presentations.update');
+      Route::post('/presentations/delete', [PresentationsController::class, 'delete'])->name('presentations.delete');
       // main routes
       Route::post('/feedback/answer', [MainController::class, 'feedbackAnswer'])->name('feedback.answer');
    });
