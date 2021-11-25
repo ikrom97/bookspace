@@ -642,6 +642,9 @@ input[type="search"]::-webkit-search-results-decoration {
    align-items: center;
    padding-right: 20px;
    padding-left: 20px;
+   background-color: transparent;
+   border: none;
+   cursor: pointer;
 }
 .create:hover {
    color: red;
@@ -713,6 +716,8 @@ input[type="search"]::-webkit-search-results-decoration {
 /* search end */
 /*! toolbar section end */
 /*! delete-modal start */
+.create-modal,
+.update-modal,
 .delete-modal {
    position: fixed;
    left: 0px;
@@ -726,10 +731,14 @@ input[type="search"]::-webkit-search-results-decoration {
    padding-top: 150px;
    opacity: 1;
 }
+.create-modal.hidden,
+.update-modal.hidden,
 .delete-modal.hidden {
    z-index: -1;
    opacity: 0;
 }
+.create-form,
+.update-form,
 .delete-form {
    background-color: #fff;
    box-shadow: 0px 6px 12px rgb(0 0 0 / 15%);
@@ -745,6 +754,24 @@ input[type="search"]::-webkit-search-results-decoration {
    min-height: 80px;
    display: flex;
    align-items: center;
+}
+.create-form__label,
+.update-form__label {
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+}
+.create-form__input,
+.update-form__input {
+   border: none;
+   border-bottom: 1px solid;
+   font-weight: bold;
+}
+.create-form__input:hover,
+.update-form__input:hover,
+.create-form__input:focus,
+.update-form__input:focus  {
+   outline: none;
 }
 /*! delete-modal end */
 /*! book-update section star */

@@ -4,6 +4,7 @@ use App\Http\Controllers\ActivitiesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BannersController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MainController;
@@ -89,6 +90,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
       Route::get('/dashboard/activities-create', [DashboardController::class, 'activitiesCreate'])->name('dashboard.activities.create');
       Route::get('/dashboard/activities-read/{activities}', [DashboardController::class, 'activitiesRead'])->name('dashboard.activities.read');
 
+      Route::get('/dashboard/companies', [DashboardController::class, 'companies'])->name('dashboard.companies');
+
       Route::get('/dashboard/sidebar', [DashboardController::class, 'sidebar'])->name('dashboard.sidebar');
       // book routes
       Route::post('/books/tempstore', [BooksController::class, 'booksTempstore']);
@@ -120,6 +123,11 @@ Route::group(['middleware' => ['AuthCheck']], function () {
       Route::post('/activities/create', [ActivitiesController::class, 'create'])->name('activities.create');
       Route::post('/activities/update', [ActivitiesController::class, 'update'])->name('activities.update');
       Route::post('/activities/delete', [ActivitiesController::class, 'delete'])->name('activities.delete');
+      // companies routes
+      Route::get('/companies/search', [CompaniesController::class, 'search'])->name('companies.search');
+      Route::post('/companies/create', [CompaniesController::class, 'create'])->name('companies.create');
+      Route::post('/companies/update', [CompaniesController::class, 'update'])->name('companies.update');
+      Route::post('/companies/delete', [CompaniesController::class, 'delete'])->name('companies.delete');
       // main routes
       Route::post('/feedback/answer', [MainController::class, 'feedbackAnswer'])->name('feedback.answer');
    });

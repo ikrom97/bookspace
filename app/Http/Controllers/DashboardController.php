@@ -104,7 +104,7 @@ class DashboardController extends Controller
       $quantity = Presentation::where('trashed', false)->count();
 
       $presentations = Presentation::where('trashed', false)->orderBy('created_at', 'desc')
-      ->paginate(16)->fragment('presentations-title');
+         ->paginate(16)->fragment('presentations-title');
 
       $rank = $presentations->firstItem();
 
@@ -136,7 +136,7 @@ class DashboardController extends Controller
       $quantity = Activity::where('trashed', false)->count();
 
       $activities = Activity::where('trashed', false)->orderBy('created_at', 'desc')
-      ->paginate(16)->fragment('activities-title');
+         ->paginate(16)->fragment('activities-title');
 
       $rank = $activities->firstItem();
 
@@ -157,6 +157,18 @@ class DashboardController extends Controller
       $activity = Activity::find($id);
 
       return view('dashboard.activities.read', compact('quantity', 'activity'));
+   }
+
+   public function companies()
+   {
+      $quantity = Company::where('trashed', false)->count();
+
+      $companies = Company::where('trashed', false)->orderBy('title', 'asc')
+         ->paginate(16)->fragment('companies-title');
+
+      $rank = $companies->firstItem();
+
+      return view('dashboard.companies.index', compact('quantity', 'companies', 'rank'));
    }
 
    public function sidebar()

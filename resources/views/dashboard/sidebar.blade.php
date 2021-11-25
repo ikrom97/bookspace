@@ -21,7 +21,7 @@
             <a class="pages-navigation-link {{$route == 'dashboard.activities' || $route == 'dashboard.activities.create' || $route == 'dashboard.activities.read' ? 'current' : ''}}" href="{{route('dashboard.activities')}}">Мероприятия</a>
          </li>
          <li class="pages-navigation-item">
-            <a class="pages-navigation-link" href="#">Компании</a>
+            <a class="pages-navigation-link {{$route == 'dashboard.companies' ? 'current' : ''}}" href="{{route('dashboard.companies')}}">Компании</a>
          </li>
          <li class="pages-navigation-item">
             <a class="pages-navigation-link" href="#">Библиотека</a>
