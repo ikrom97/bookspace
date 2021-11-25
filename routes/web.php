@@ -85,6 +85,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
       Route::get('/dashboard/presentations-create', [DashboardController::class, 'presentationsCreate'])->name('dashboard.presentations.create');
       Route::get('/dashboard/presentations-read/{presentations}', [DashboardController::class, 'presentationsRead'])->name('dashboard.presentations.read');
 
+      Route::get('/dashboard/activities', [DashboardController::class, 'activities'])->name('dashboard.activities');
+      Route::get('/dashboard/activities-create', [DashboardController::class, 'activitiesCreate'])->name('dashboard.activities.create');
+      Route::get('/dashboard/activities-read/{activities}', [DashboardController::class, 'activitiesRead'])->name('dashboard.activities.read');
+
       Route::get('/dashboard/sidebar', [DashboardController::class, 'sidebar'])->name('dashboard.sidebar');
       // book routes
       Route::post('/books/tempstore', [BooksController::class, 'booksTempstore']);
@@ -111,6 +115,11 @@ Route::group(['middleware' => ['AuthCheck']], function () {
       Route::post('/presentations/create', [PresentationsController::class, 'create'])->name('presentations.create');
       Route::post('/presentations/update', [PresentationsController::class, 'update'])->name('presentations.update');
       Route::post('/presentations/delete', [PresentationsController::class, 'delete'])->name('presentations.delete');
+      // activities routes
+      Route::get('/activities/search', [ActivitiesController::class, 'search'])->name('activities.search');
+      Route::post('/activities/create', [ActivitiesController::class, 'create'])->name('activities.create');
+      Route::post('/activities/update', [ActivitiesController::class, 'update'])->name('activities.update');
+      Route::post('/activities/delete', [ActivitiesController::class, 'delete'])->name('activities.delete');
       // main routes
       Route::post('/feedback/answer', [MainController::class, 'feedbackAnswer'])->name('feedback.answer');
    });

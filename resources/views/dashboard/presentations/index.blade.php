@@ -10,7 +10,7 @@
                   <span class="search-icon" data-family="search">
                      <svg data-family="search" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-family="search" d="M17 17l5 5m-2.5-11.25a8.75 8.75 0 11-17.5 0 8.75 8.75 0 0117.5 0z" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   </span>
-                  <input class="search-input" data-family="search" type="search" name="keyword" placeholder="Поиск пользователей . . ." autocomplete="off">
+                  <input class="search-input" data-family="search" type="search" name="keyword" placeholder="Поиск презентаций . . ." autocomplete="off">
                </label>
                <button class="search-submit-btn visually-hidden" data-family="search" type="submit"></button>
             </form>
@@ -20,7 +20,7 @@
          <a class="create" href="{{route('dashboard.presentations.create')}}">Добавить новую презентацию</a>
       </section>
       <section class="content">
-         <h1 id="users-title">Презентации</h1>
+         <h1 id="presentations-title">Презентации</h1>
          <ul class="breadcrumbs">
             <li class="breadcrumbs-item">
                <a class="breadcrumbs-link" href="{{route('dashboard.books')}}">Панель управления сайтом</a>

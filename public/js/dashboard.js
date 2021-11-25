@@ -47,7 +47,52 @@ if (dashboardSidebar) {
 /*!****************************************************!*\
   !*** ./resources/js/dashboard/activities/index.js ***!
   \****************************************************/
+var activitiesPage = document.querySelector('.activities-page');
 
+if (activitiesPage) {
+  var deleteBtns = activitiesPage.querySelectorAll('[data-action="delete"]'),
+      deleteModal = activitiesPage.querySelector('.delete-modal'),
+      deleteInput = deleteModal.querySelector('[data-id="activity-id"]'),
+      searchForm = activitiesPage.querySelector('.search-form'),
+      searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchInput = searchForm.querySelector('.search-input'),
+      searchResult = activitiesPage.querySelector('.search-result'),
+      body = document.querySelector('body');
+  deleteBtns.forEach(function (button) {
+    button.onclick = function () {
+      deleteInput.value = button.dataset.activity;
+      deleteModal.classList.remove('hidden');
+    };
+  });
+  deleteModal.addEventListener('click', function (e) {
+    if (e.target.className == 'delete-modal' || e.target.className == 'button button--green') {
+      deleteModal.classList.add('hidden');
+    }
+  }); //* search start
+
+  searchBtn.onclick = function (e) {
+    e.preventDefault();
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'search') {
+      searchForm.reset();
+      searchResult.innerHTML = '';
+    }
+  });
+
+  searchInput.onkeyup = function (e) {
+    e.preventDefault();
+    var keyword = searchInput.value;
+    $.ajax({
+      url: "/activities/search?keyword=".concat(keyword),
+      success: function success(result) {
+        searchResult.innerHTML = result;
+      }
+    });
+  }; //* search end
+
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
@@ -55,7 +100,64 @@ if (dashboardSidebar) {
 /*!*****************************************************!*\
   !*** ./resources/js/dashboard/activities/create.js ***!
   \*****************************************************/
+var activitiesCreatePage = document.querySelector('.activities-create-page');
 
+if (activitiesCreatePage) {
+  var searchForm = activitiesCreatePage.querySelector('.search-form'),
+      searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchInput = searchForm.querySelector('.search-input'),
+      searchResult = activitiesCreatePage.querySelector('.search-result'),
+      body = document.querySelector('body'); //* search start
+
+  searchBtn.onclick = function (e) {
+    e.preventDefault();
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'search') {
+      searchForm.reset();
+      searchResult.innerHTML = '';
+    }
+  });
+
+  searchInput.onkeyup = function (e) {
+    e.preventDefault();
+    var keyword = searchInput.value;
+    $.ajax({
+      url: "/activities/search?keyword=".concat(keyword),
+      success: function success(result) {
+        searchResult.innerHTML = result;
+      }
+    });
+  }; //* search end
+  //* datetime picker start
+
+
+  $('#start').dateTimePicker({
+    dateFormat: "YYYY-MM-DD HH:mm",
+    locale: 'ru',
+    showTime: true,
+    selectData: "now",
+    positionShift: {
+      top: 20,
+      left: 0
+    },
+    title: "Select Date and Time",
+    buttonTitle: "Select"
+  });
+  $('#end').dateTimePicker({
+    dateFormat: "YYYY-MM-DD HH:mm",
+    locale: 'ru',
+    showTime: true,
+    selectData: "now",
+    positionShift: {
+      top: 20,
+      left: 0
+    },
+    title: "Select Date and Time",
+    buttonTitle: "Select"
+  }); //* datetime picker end
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
@@ -63,15 +165,77 @@ if (dashboardSidebar) {
 /*!***************************************************!*\
   !*** ./resources/js/dashboard/activities/read.js ***!
   \***************************************************/
+var activityReadPage = document.querySelector('.activity-read-page');
 
-})();
+if (activityReadPage) {
+  var deleteBtn = activityReadPage.querySelector('.toolbar-delete'),
+      deleteModal = activityReadPage.querySelector('.delete-modal'),
+      searchForm = activityReadPage.querySelector('.search-form'),
+      searchBtn = searchForm.querySelector('.search-submit-btn'),
+      searchInput = searchForm.querySelector('.search-input'),
+      searchResult = activityReadPage.querySelector('.search-result'),
+      body = document.querySelector('body'); //* delete modal start
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
-(() => {
-/*!*****************************************************!*\
-  !*** ./resources/js/dashboard/activities/update.js ***!
-  \*****************************************************/
+  deleteBtn.onclick = function () {
+    deleteModal.classList.remove('hidden');
+  };
 
+  deleteModal.addEventListener('click', function (e) {
+    if (e.target.className == 'delete-modal' || e.target.className == 'button button--green') {
+      deleteModal.classList.add('hidden');
+    }
+  }); //* delete modal end
+  //* search start
+
+  searchBtn.onclick = function (e) {
+    e.preventDefault();
+  };
+
+  body.addEventListener('click', function (e) {
+    if (e.target.dataset.family != 'search') {
+      searchForm.reset();
+      searchResult.innerHTML = '';
+    }
+  });
+
+  searchInput.onkeyup = function (e) {
+    e.preventDefault();
+    var keyword = searchInput.value;
+    $.ajax({
+      url: "/activities/search?keyword=".concat(keyword),
+      success: function success(result) {
+        searchResult.innerHTML = result;
+      }
+    });
+  }; //* search end
+  //* datetime picker start
+
+
+  $('#start').dateTimePicker({
+    dateFormat: "YYYY-MM-DD HH:mm",
+    locale: 'ru',
+    showTime: true,
+    selectData: "now",
+    positionShift: {
+      top: 20,
+      left: 0
+    },
+    title: "Select Date and Time",
+    buttonTitle: "Select"
+  });
+  $('#end').dateTimePicker({
+    dateFormat: "YYYY-MM-DD HH:mm",
+    locale: 'ru',
+    showTime: true,
+    selectData: "now",
+    positionShift: {
+      top: 20,
+      left: 0
+    },
+    title: "Select Date and Time",
+    buttonTitle: "Select"
+  }); //* datetime picker end
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.

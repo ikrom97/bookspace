@@ -10,7 +10,7 @@
                   <span class="search-icon" data-family="search">
                      <svg data-family="search" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-family="search" d="M17 17l5 5m-2.5-11.25a8.75 8.75 0 11-17.5 0 8.75 8.75 0 0117.5 0z" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   </span>
-                  <input class="search-input" data-family="search" type="search" name="keyword" placeholder="Поиск по книгам . . ." autocomplete="off">
+                  <input class="search-input" data-family="search" type="search" name="keyword" placeholder="Поиск презентаций . . ." autocomplete="off">
                </label>
                <button data-family="search" class="search-submit-btn visually-hidden" type="submit"></button>
             </form>

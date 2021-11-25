@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Banner;
 use App\Models\Book;
 use App\Models\Category;
@@ -77,7 +78,7 @@ class DashboardController extends Controller
    {
       $quantity = Banner::where('trashed', false)->count();
 
-      $banners = Banner::where('trashed', false)->paginate(16);
+      $banners = Banner::where('trashed', false)->paginate(16)->fragment('banners-title');
 
       $rank = $banners->firstItem();
 
@@ -102,7 +103,8 @@ class DashboardController extends Controller
    {
       $quantity = Presentation::where('trashed', false)->count();
 
-      $presentations = Presentation::where('trashed', false)->orderBy('created_at', 'desc')->paginate(16);
+      $presentations = Presentation::where('trashed', false)->orderBy('created_at', 'desc')
+      ->paginate(16)->fragment('presentations-title');
 
       $rank = $presentations->firstItem();
 
@@ -127,6 +129,34 @@ class DashboardController extends Controller
       $presentation = Presentation::find($id);
 
       return view('dashboard.presentations.read', compact('quantity', 'presentation'));
+   }
+
+   public function activities()
+   {
+      $quantity = Activity::where('trashed', false)->count();
+
+      $activities = Activity::where('trashed', false)->orderBy('created_at', 'desc')
+      ->paginate(16)->fragment('activities-title');
+
+      $rank = $activities->firstItem();
+
+      return view('dashboard.activities.index', compact('quantity', 'activities', 'rank'));
+   }
+
+   public function activitiesCreate()
+   {
+      $quantity = Activity::where('trashed', false)->count();
+
+      return view('dashboard.activities.create', compact('quantity'));
+   }
+
+   public function activitiesRead($id)
+   {
+      $quantity = Activity::where('trashed', false)->count();
+
+      $activity = Activity::find($id);
+
+      return view('dashboard.activities.read', compact('quantity', 'activity'));
    }
 
    public function sidebar()

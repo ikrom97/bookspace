@@ -18,7 +18,7 @@
             <a class="pages-navigation-link {{$route == 'dashboard.presentations' || $route == 'dashboard.presentations.create' || $route == 'dashboard.presentations.read' ? 'current' : ''}}" href="{{route('dashboard.presentations')}}">Презентации</a>
          </li>
          <li class="pages-navigation-item">
-            <a class="pages-navigation-link" href="#">Мероприятия</a>
+            <a class="pages-navigation-link {{$route == 'dashboard.activities' || $route == 'dashboard.activities.create' || $route == 'dashboard.activities.read' ? 'current' : ''}}" href="{{route('dashboard.activities')}}">Мероприятия</a>
          </li>
          <li class="pages-navigation-item">
             <a class="pages-navigation-link" href="#">Компании</a>
