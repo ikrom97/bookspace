@@ -1255,6 +1255,7 @@ div#time-line {
    display: flex;
    justify-content: center;
    gap: 10px;
+   flex-wrap: wrap;
 }
 .page-link {
    user-select: none;

@@ -24,17 +24,17 @@
             <ul class="ratings-list">
                <li class="ratings-list-head">
                   <span class="width-40">Модератор</span>
-                  <span class="width-30">Аудитория</span>
-                  <span class="width-15 txt-center">Участники</span>
-                  <span class="width-15 txt-center">Дата окончания</span>
+                  <span class="width-25">Аудитория</span>
+                  <span class="width-10 txt-center">Участники</span>
+                  <span class="width-25 txt-center">Дата окончания</span>
                </li>
                @foreach ($activities as $activity)
                   <li class="ratings-list-item">
                      <a class="ratings-list-link" href="{{route('activities.read', $activity->id)}}">
                         <span class="width-40">{{$rank++}}. {{$activity->moderator}}</span>
-                        <span class="width-30">{{$activity->audience}}</span>
-                        <span class="width-15 txt-center">{{$activity->participants->count()}}</span>
-                        <span class="width-15 txt-center">{{$activity->end}}</span>
+                        <span class="width-25">{{$activity->audience}}</span>
+                        <span class="width-10 txt-center">{{$activity->participants->count()}}</span>
+                        <span class="width-25 txt-center">{{$activity->end}}</span>
                      </a>
                   </li>
                @endforeach

@@ -73,7 +73,7 @@
          </div>
       @endisset
       <section class="books">
-         <div class="container books__container">
+         <div class="container">
             <ul class="books__list {{$list == 'list' ? 'hidden' : ''}}">
                @foreach ($books as $book)
                   <li class="books__item">

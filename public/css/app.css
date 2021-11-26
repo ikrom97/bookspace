@@ -425,7 +425,6 @@ input[type="search"]::-webkit-search-results-decoration {
    align-items: center;
    height: 35px;
    padding-left: 15px;
-   min-width: max-content;
    width: 100%;
    padding-right: 15px;
    position: relative;
@@ -476,7 +475,6 @@ input[type="search"]::-webkit-search-results-decoration {
 /*! user-pages end */
 /*! activity section start */
 .activity {
-   width: calc(50% - 15px);
    padding: 30px;
    background-color: #fff;
    border-radius: 15px;
@@ -734,7 +732,7 @@ input[type="search"]::-webkit-search-results-decoration {
    gap: 10px;
 }
 .presentation-item {
-   width: 60%;
+   width: 40%;
    position: relative;
    display: flex;
 }
@@ -748,6 +746,7 @@ input[type="search"]::-webkit-search-results-decoration {
    top: 0px;
    right: 0px;
    transform: translateX(100%);
+   min-width: max-content;
 }
 .presentation-link {
    background-color: #72b54e;
@@ -864,6 +863,20 @@ input[type="search"]::-webkit-search-results-decoration {
    .scroll-top-btn {
       right: 35px;
    }
+   .ratings-page__container {
+      flex-wrap: wrap;
+      gap: 0px;
+   }
+   .ratings-sidebar {
+      order: 1;
+      width: 100%;
+      padding-top: 0px;
+   }
+   .ratings-navigation {
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+   }
 }
 @media screen and (max-width: 575px) {
    .container {
@@ -872,6 +885,31 @@ input[type="search"]::-webkit-search-results-decoration {
    }
    .scroll-top-btn {
       display: none;
+   }
+   .ratings-list-head span:nth-of-type(2),
+   .ratings-list-link span:nth-of-type(2) {
+      display: none;
+   }
+   .ratings-list-head span:nth-of-type(1),
+   .ratings-list-link span:nth-of-type(1) {
+      flex-grow: 1;
+   }
+   .activity-item {
+      width: auto;
+      gap: 10px;
+   }
+   .activity-item-seperator {
+      display: none;
+   }
+   .activity-item b {
+      transform: none;
+      position: static;
+   }
+   .avatar-wrap {
+      margin: 0px;
+   }
+   .form {
+      padding: 10px;
    }
 }
 /*! responsive and adaptive end */
@@ -1299,7 +1337,7 @@ input[type="search"]::-webkit-search-results-decoration {
    gap: 10px;
    padding: 20px;
    position: relative;
-   min-width: 500px;
+   width: 500px;
    box-shadow: 0px 6px 12px rgb(0 0 0 / 15%);
 }
 .feedback-form fieldset {
@@ -1906,6 +1944,7 @@ input[type="search"]::-webkit-search-results-decoration {
    display: flex;
    justify-content: center;
    gap: 10px;
+   flex-wrap: wrap;
 }
 .page-link {
    user-select: none;
@@ -2327,6 +2366,7 @@ div#time-line {
 .profile__user-read {
    display: flex;
    background-color: #fff;
+   flex-wrap: wrap;
 }
 .avatar-wrap {
    display: flex;
@@ -2382,6 +2422,15 @@ div#time-line {
    text-transform: uppercase;
    font-size: 18px;
 }
+/** responsive and adaptive start */
+@media screen and (max-width: 991px) {
+}
+@media screen and (max-width: 575px) {
+   .avatar-wrap {
+      margin: 0px;
+   }
+}
+/** responsive and adaptive end */
 
 
 
@@ -2416,13 +2465,13 @@ div#time-line {
    display: flex;
    flex-wrap: wrap;
    gap: 10px;
-   height: 40px;
 }
 /* catalog-dropdown start */
 .catalog-dropdown {
    background-color: #fff;
    border-radius: 4px;
-   height: 100%;
+   height: 40px;
+   flex-grow: 1;
    width: max-content;
 }
 .catalog-dropdown__button {
@@ -2506,7 +2555,9 @@ div#time-line {
    gap: 50px;
    padding-left: 20px;
    padding-right: 20px;
-   height: 100%;
+   height: 40px;
+   flex-grow: 1;
+   justify-content: space-between;
    text-transform: uppercase;
 }
 .books-view__list {
@@ -2535,16 +2586,19 @@ div#time-line {
    background-color: #fff;
    border-radius: 4px;
    display: flex;
-   align-items: center;
-   height: 100%;
+   min-height: 40px;
    padding-left: 20px;
    padding-right: 20px;
    flex-grow: 1;
    justify-content: space-between;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   gap: 10px;
 }
 .books-sort__list {
    display: flex;
    gap: 15px;
+   flex-wrap: wrap;
 }
 .books-sort__link {
    color: #c5c5c5;
@@ -2576,12 +2630,11 @@ div#time-line {
 .books__list {
    display: flex;
    flex-wrap: wrap;
-   gap: 28px;
+   gap: 10px;
    margin-bottom: 20px;
 }
 .books__rating-list {
    margin-bottom: 20px;
-   margin-left: 25px;
 }
 .books__list.hidden,
 .books__rating-list.hidden {

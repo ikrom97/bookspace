@@ -210,7 +210,7 @@ class PagesController extends Controller
       $book = Book::find($id);
 
       $similarBooks = Book::select('id', 'category_id', 'user_id', 'img_front', 'title', 'author', 'rating', 'trashed')
-         ->where('trashed', false)->where('category_id', $book->category_id)->orderBy('rating', 'desc')->get();
+         ->where('trashed', false)->where('category_id', $book->category_id)->orderBy('rating', 'desc')->paginate(9);
 
       return view('pages.books.read', compact('book', 'similarBooks'));
    }
@@ -333,7 +333,7 @@ class PagesController extends Controller
 
    public function users()
    {
-      $users = User::select('id', 'company_id', 'name', 'surname', 'trashed')
+      $users = User::select('id', 'company_id', 'name', 'surname', 'read_pages', 'trashed')
          ->where('trashed', false)->orderBy('surname', 'asc')
          ->paginate(16)->fragment('users-title');
 

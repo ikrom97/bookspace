@@ -4,7 +4,6 @@
 
 @section('content')
    <main class="about-page">
-      
       <section class="our-values">
          <img class="our-values__bg" src="{{asset('img/our-values-bg.jpg')}}">
          <div class="container">

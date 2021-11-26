@@ -16,7 +16,7 @@
             <ul class="books-categories-list">
                @foreach ($categories as $category)
                   <li class="books-categories-item">
-                     <a class="books-categories-card" href="{{route('books.categories', $category->id)}}">
+                     <a class="books-categories-card" href="{{route('books.categories')}}?category={{$category->id}}">
                         <div class="books-categories-icon">
                            {!! $category->icon !!}
                         </div>

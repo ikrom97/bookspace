@@ -425,7 +425,6 @@ input[type="search"]::-webkit-search-results-decoration {
    align-items: center;
    height: 35px;
    padding-left: 15px;
-   min-width: max-content;
    width: 100%;
    padding-right: 15px;
    position: relative;
@@ -476,7 +475,6 @@ input[type="search"]::-webkit-search-results-decoration {
 /*! user-pages end */
 /*! activity section start */
 .activity {
-   width: calc(50% - 15px);
    padding: 30px;
    background-color: #fff;
    border-radius: 15px;
@@ -734,7 +732,7 @@ input[type="search"]::-webkit-search-results-decoration {
    gap: 10px;
 }
 .presentation-item {
-   width: 60%;
+   width: 40%;
    position: relative;
    display: flex;
 }
@@ -748,6 +746,7 @@ input[type="search"]::-webkit-search-results-decoration {
    top: 0px;
    right: 0px;
    transform: translateX(100%);
+   min-width: max-content;
 }
 .presentation-link {
    background-color: #72b54e;
@@ -864,6 +863,20 @@ input[type="search"]::-webkit-search-results-decoration {
    .scroll-top-btn {
       right: 35px;
    }
+   .ratings-page__container {
+      flex-wrap: wrap;
+      gap: 0px;
+   }
+   .ratings-sidebar {
+      order: 1;
+      width: 100%;
+      padding-top: 0px;
+   }
+   .ratings-navigation {
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+   }
 }
 @media screen and (max-width: 575px) {
    .container {
@@ -872,6 +885,31 @@ input[type="search"]::-webkit-search-results-decoration {
    }
    .scroll-top-btn {
       display: none;
+   }
+   .ratings-list-head span:nth-of-type(2),
+   .ratings-list-link span:nth-of-type(2) {
+      display: none;
+   }
+   .ratings-list-head span:nth-of-type(1),
+   .ratings-list-link span:nth-of-type(1) {
+      flex-grow: 1;
+   }
+   .activity-item {
+      width: auto;
+      gap: 10px;
+   }
+   .activity-item-seperator {
+      display: none;
+   }
+   .activity-item b {
+      transform: none;
+      position: static;
+   }
+   .avatar-wrap {
+      margin: 0px;
+   }
+   .form {
+      padding: 10px;
    }
 }
 /*! responsive and adaptive end */

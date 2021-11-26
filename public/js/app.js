@@ -417,6 +417,7 @@ if (bookReadPage) {
   $('.popular-books-carousel').owlCarousel({
     items: 4,
     margin: 9,
+    autoWidth: true,
     loop: true,
     autoplay: true,
     autoplayTimeout: 3000,
