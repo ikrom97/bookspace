@@ -8,16 +8,15 @@
 }
 .login-page__container {
    display: flex;
-   background-color: #fff;
-   border-radius: 8px;
 }
 /** login section start */
 .login {
    display: flex;
    flex-direction: column;
-   width: 65%;
    padding: 10px;
    min-height: 70vh;
+   background-color: #fff;
+   flex-grow: 3;
 }
 .logos-wrapper {
    display: flex;
@@ -124,12 +123,12 @@
 /** login section end */
 /** welcome section start */
 .welcome {
-   background-image: url("../img/auth/side-bg.jpg");
+   background-image: url(../img/auth/side-bg.jpg);
    background-size: cover;
    color: #fff;
-   width: 35%;
    display: flex;
    flex-direction: column;
+   flex-grow: 1;
 }
 .welcome__wrapper {
    flex-grow: 1;
@@ -148,3 +147,29 @@
    text-align: end;
 }
 /** welcome section end */
+/** media quaries start */
+@media screen and (max-width: 991px) {
+   .welcome {
+      display: none;
+   }
+}
+@media screen and (max-width: 575px) {
+   .login-page {
+      background-image: none;
+      background-color: #fff;
+      align-items: normal;
+   }
+   .login {
+      min-height: 100%;
+      height: 100%;
+      padding-left: 0px;
+      padding-right: 0px;
+   }
+   .login-input {
+      min-width: auto;
+   }
+   .login-submit-btn {
+      width: 263px;
+   }
+}
+/** media quaries end */

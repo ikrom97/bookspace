@@ -31,7 +31,6 @@ body {
    min-height: 100vh;
    background-color: #eae9f3;
    color: #1d1d1d;
-   overflow-x: hidden;
 }
 main {
    flex-grow: 1;
@@ -51,8 +50,12 @@ input[type="radio"].visually-hidden {
    overflow: hidden;
 }
 .container {
-   width: 1260px;
-   margin: 0 auto;
+   width: 100%;
+   max-width: 1400px;
+   padding-left: 70px;
+   padding-right: 70px;
+   margin-left: auto;
+   margin-right: auto;
 }
 .main-logo {
    display: inline-block;
@@ -127,7 +130,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .scroll-top-btn {
    position: absolute;
    bottom: 53px;
-   right: -60px;
+   right: 45px;
    display: flex;
    justify-content: center;
    align-items: center;
@@ -857,3 +860,23 @@ input[type="search"]::-webkit-search-results-decoration {
 .green-bg {
    background-color: #63a63e;
 }
+/*! media quaries start */
+@media screen and (max-width: 991px) {
+   .container {
+      padding-left: 35px;
+      padding-right: 35px;
+   }
+   .scroll-top-btn {
+      right: 35px;
+   }
+}
+@media screen and (max-width: 575px) {
+   .container {
+      padding-left: 15px;
+      padding-right: 15px;
+   }
+   .scroll-top-btn {
+      display: none;
+   }
+}
+/*! media quaries end */

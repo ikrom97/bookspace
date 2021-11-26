@@ -76,9 +76,10 @@ if (header) {
     setTimeout(countdown, 1000);
   };
 
-  var searchForm = header.querySelector('.search-form'),
-      searchInput = searchForm.querySelector('.search-input'),
-      searchBtn = searchForm.querySelector('.search-submit-btn'),
+  var searchWrap = header.querySelector('.search-wrap'),
+      searchForm = searchWrap.querySelector('.search-form'),
+      searchInput = searchWrap.querySelector('.search-input'),
+      searchBtn = searchWrap.querySelector('.search-submit-btn'),
       searchResult = header.querySelector('.search-result'),
       feedbackModal = header.querySelector('.feedback-modal'),
       feedbackBtn = header.querySelector('.feedback'); //* search start
@@ -86,17 +87,19 @@ if (header) {
   searchBtn.onclick = function (e) {
     e.preventDefault();
 
-    if (!searchForm.classList.contains('opened')) {
+    if (searchWrap.classList.contains('opened')) {
+      searchWrap.classList.remove('opened');
+      searchForm.reset();
+      searchResult.innerHTML = '';
+    } else {
+      searchWrap.classList.add('opened');
       searchInput.focus();
     }
-
-    searchForm.classList.toggle('opened');
-    searchForm.reset();
   };
 
   body.addEventListener('click', function (e) {
     if (e.target.dataset.family != 'search') {
-      searchForm.classList.remove('opened');
+      searchWrap.classList.remove('opened');
       searchForm.reset();
       searchResult.innerHTML = '';
     }

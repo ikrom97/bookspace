@@ -3,7 +3,7 @@
       <div class="container header-top__container">
          <a class="header-logo" href="{{route('home')}}">
             <img class="main-logo" src="{{asset('img/main-logo.png')}}" alt="AtS Book Space">
-            {{$site->title}}
+            <span>{{$site->title}}</span>
          </a>
          <div class="search-wrap">
             <div class="search">
