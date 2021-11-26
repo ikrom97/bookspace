@@ -12,7 +12,7 @@
          <ul class="categories-navigation">
             @foreach ($categories as $category)
                <li class="categories-navigation-item">
-                  <a class="categories-navigation-link" href="{{route('books.categories', $category->id)}}">{{$category->title}}</a>
+                  <a class="categories-navigation-link" href="{{route('books.categories')}}?category={{$category->id}}">{{$category->title}}</a>
                </li>
             @endforeach
          </ul>

@@ -222,9 +222,9 @@ if (homePage) {
     margin: 15,
     loop: true,
     autoWidth: true,
-    // autoplay: true,
-    // autoplayTimeout: 3000,
-    // autoplayHoverPause: true,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true,
     nav: true
   }); //* popular books end
 }

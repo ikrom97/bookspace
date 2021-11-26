@@ -7,7 +7,7 @@
       
       <section class="our-values">
          <img class="our-values__bg" src="{{asset('img/our-values-bg.jpg')}}">
-         <div class="our-values__container">
+         <div class="container">
             <h2 class="our-values__title">Наши планы</h2>
             <ul class="values">
                <li class="values__item">

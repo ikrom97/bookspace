@@ -30,20 +30,14 @@
    object-fit: cover;
    opacity: 5%;
 }
-.our-values__container {
-   border-radius: 15px;
-   margin: 0px auto;
-   width: 1260px;
-   position: relative;
-}
 .values {
    display: flex;
    justify-content: space-between;
-   width: 1158px;
    flex-wrap: wrap;
+   gap: 30px;
 }
 .values__item {
-   max-width: 180px;
+   min-width: max-content;
 }
 .values__title {
    font-size: 18px;
