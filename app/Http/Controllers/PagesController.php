@@ -23,10 +23,10 @@ class PagesController extends Controller
       $banners = Banner::get();
 
       $popularBooks = Book::select('id', 'category_id', 'user_id', 'img_front', 'title', 'author', 'rating', 'trashed')
-         ->where('trashed', false)->orderBy('rating', 'desc')->paginate(32);
+         ->where('trashed', false)->orderBy('rating', 'desc')->paginate(9);
 
       $newBooks = Book::select('id', 'category_id', 'user_id', 'img_front', 'title', 'author', 'rating', 'trashed', 'created_at')
-         ->where('trashed', false)->orderBy('created_at', 'desc')->paginate(32);
+         ->where('trashed', false)->orderBy('created_at', 'desc')->paginate(9);
 
       $booksCount = Book::count();
 

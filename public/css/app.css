@@ -306,11 +306,6 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 /*! breadcrumbs end */
 /*! popular-books section start */
-.popular-books__container {
-   position: relative;
-   left: 6px;
-   width: 1272px;
-}
 .popular-books-title {
    padding-bottom: 24px;
 }
@@ -860,7 +855,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .green-bg {
    background-color: #63a63e;
 }
-/*! media quaries start */
+/*! responsive and adaptive start */
 @media screen and (max-width: 991px) {
    .container {
       padding-left: 35px;
@@ -879,7 +874,7 @@ input[type="search"]::-webkit-search-results-decoration {
       display: none;
    }
 }
-/*! media quaries end */
+/*! responsive and adaptive end */
 
 .header {
    background-color: #f2f6f8;
@@ -993,6 +988,7 @@ input[type="search"]::-webkit-search-results-decoration {
    bottom: 0px;
    left: 0px;
    width: 100%;
+   min-width: 630px;
    background-color: #fff;
    transform: translateY(calc(100% + 5px));
    box-shadow: 0px 6px 12px rgb(0 0 0 / 15%);
@@ -1388,9 +1384,6 @@ input[type="search"]::-webkit-search-results-decoration {
    .header-bottom__container {
       gap: 40px 20px;
    }
-   .site-quote {
-      width: 100%;
-   }
    .contact-phone {
       margin-left: auto;
    }
@@ -1432,7 +1425,7 @@ input[type="search"]::-webkit-search-results-decoration {
       height: 50px;
    }
    .notification-link {
-      margin-left: 40px;
+      margin-left: 45px;
    }
    .taken-book {
       margin-left: auto;
@@ -1589,7 +1582,7 @@ input[type="search"]::-webkit-search-results-decoration {
       gap: 0px 20px;
    }
    .categories-navigation-item {
-      margin-left: 0px;
+      padding-left: 0px;
    }
    .footer-bottom__right {
       width: 100%;
@@ -2111,6 +2104,16 @@ input[type="search"]::-webkit-search-results-decoration {
    height: 100%;
    width: 100%;
 }
+/** responsive and adaptive start */
+@media screen and (max-width: 991px) {
+   .vitrin {
+      display: none;
+   }
+}
+@media screen and (max-width: 575px) {
+   
+}
+/** responsive and adaptive end */
 
 /** present time section start */
 .present-time {

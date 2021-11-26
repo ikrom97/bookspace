@@ -306,11 +306,6 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 /*! breadcrumbs end */
 /*! popular-books section start */
-.popular-books__container {
-   position: relative;
-   left: 6px;
-   width: 1272px;
-}
 .popular-books-title {
    padding-bottom: 24px;
 }
@@ -860,7 +855,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .green-bg {
    background-color: #63a63e;
 }
-/*! media quaries start */
+/*! responsive and adaptive start */
 @media screen and (max-width: 991px) {
    .container {
       padding-left: 35px;
@@ -879,4 +874,4 @@ input[type="search"]::-webkit-search-results-decoration {
       display: none;
    }
 }
-/*! media quaries end */
+/*! responsive and adaptive end */

@@ -154,3 +154,13 @@
    height: 100%;
    width: 100%;
 }
+/** responsive and adaptive start */
+@media screen and (max-width: 991px) {
+   .vitrin {
+      display: none;
+   }
+}
+@media screen and (max-width: 575px) {
+   
+}
+/** responsive and adaptive end */

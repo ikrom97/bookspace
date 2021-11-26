@@ -110,6 +110,7 @@
    bottom: 0px;
    left: 0px;
    width: 100%;
+   min-width: 630px;
    background-color: #fff;
    transform: translateY(calc(100% + 5px));
    box-shadow: 0px 6px 12px rgb(0 0 0 / 15%);
@@ -505,9 +506,6 @@
    .header-bottom__container {
       gap: 40px 20px;
    }
-   .site-quote {
-      width: 100%;
-   }
    .contact-phone {
       margin-left: auto;
    }
@@ -549,7 +547,7 @@
       height: 50px;
    }
    .notification-link {
-      margin-left: 40px;
+      margin-left: 45px;
    }
    .taken-book {
       margin-left: auto;

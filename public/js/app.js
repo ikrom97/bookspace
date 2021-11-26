@@ -219,11 +219,12 @@ if (homePage) {
 
   $('.popular-books-carousel').owlCarousel({
     items: 4,
-    margin: 9,
+    margin: 15,
     loop: true,
-    autoplay: true,
-    autoplayTimeout: 3000,
-    autoplayHoverPause: true,
+    autoWidth: true,
+    // autoplay: true,
+    // autoplayTimeout: 3000,
+    // autoplayHoverPause: true,
     nav: true
   }); //* popular books end
 }
