@@ -20,7 +20,7 @@ class PagesController extends Controller
 {
    public function index()
    {
-      $banners = Banner::get();
+      $banners = Banner::where('trashed', false)->get();
 
       $popularBooks = Book::select('id', 'category_id', 'user_id', 'img_front', 'title', 'author', 'rating', 'trashed')
          ->where('trashed', false)->orderBy('rating', 'desc')->paginate(9);
